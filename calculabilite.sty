@@ -1,0 +1,137 @@
+%% Color
+
+\usepackage{color}
+\usepackage{xcolor}
+
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{blue}{rgb}{0,0,1}
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\darkgreen}[1]{\textcolor{darkgreen}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+%% Basic algebra
+
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Zn}[1]{\mathbb{Z}/#1\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\K}{\mathbb{K}}
+
+\newcommand{\pgcd}[2]{\text{pgcd}(#1,#2)}
+
+\newcommand{\goatp}{\mathfrak{p}}
+\newcommand{\goatm}{\mathfrak{m}}
+
+\newcommand{\car}{\text{car}}
+
+\newcommand{\degExt}[2]{[ #1 : #2 ]}
+
+\newcommand{\id}{\text{id}}
+
+%% Polynomials
+
+\newcommand{\QX}{\mathbb{Q}[X]}
+\newcommand{\RX}{\mathbb{R}[X]}
+\newcommand{\CX}{\mathbb{C}[X]}
+
+\newcommand{\AX}{A[X]}
+
+\newcommand{\Pt}{\tilde{P}}
+\newcommand{\Qt}{\tilde{Q}}
+
+
+%% Vector spaces
+
+\newcommand{\LE}{\mathcal{L}(E)}
+
+\newcommand{\spec}{\text{Spec}}
+\newcommand{\vect}{\text{Vect}}
+
+
+\newcommand{\Mn}[2]{\mathcal{M}_{#1}(#2)}
+
+%% Functions
+
+\newcommand{\restr}[2]{#1_{\restriction #2}}
+
+
+%% Logic
+
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\setdef}[2]{\set{#1 \mid #2}}
+\newcommand{\parts}[1]{\mathcal{P}\left(#1\right)}
+
+%% Basic automata theory
+
+%%%% Basic definitions
+
+\newcommand{\alphabet}{\Sigma}
+
+\newcommand{\mot}{w}
+
+\newcommand{\decomp}[2] {
+	#1_1 #1_2 \ldots #1_{#2}
+}
+
+\newcommand{\motDecomp}[2] {
+	#1 = \decomp{#1}{#2}
+}
+
+\newcommand{\motvide}{\varepsilon}
+\newcommand{\len}[1]{|#1|}
+
+
+\newcommand{\kleenestar}{*}
+\newcommand{\kleene}[1]{#1^{\kleenestar}}
+\newcommand{\mots}{\kleene{\alphabet}}
+
+%%%% Languages
+
+\newcommand{\lang}[1]{\mathcal{L}\left(#1\right)}
+\newcommand{\langstar}{\kleene{\lang}}
+
+%%%% Regex
+
+\newcommand{\eratsym}{ERat}
+\newcommand{\erat}{\text{\eratsym}}
+
+
+%% Abbreviations
+
+\newcommand{\ssi}{si et seulement si }
+\newcommand{\tlq}{telle que }
+\newcommand{\tq}{tel que }
+\newcommand{\exprat}{expression rationnelle }
+\newcommand{\cad}{c'est-à-dire }
+\newcommand{\ie}{\textit{i.e.} }
+\newcommand{\eg}{\textit{e.g.} }
+
+
+
+%% Environments
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{coro}[theorem]{Corollaire}
+\newtheorem{lemma}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}[section]
+\newtheorem{notation}{Notation}[section]
+\newtheorem{exemple}{Exemple}[subsection]
+\newtheorem{exercice}{Exercice}[subsection]
+
+\theoremstyle{plain}
+\newtheorem{remarque}{Remarque}[subsection]
+\newtheorem{rappel}{Rappel}[subsection]

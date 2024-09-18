@@ -1,0 +1,48 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+      - uses: xu-cheng/latex-action@v3
+        with:
+          root_file: calculabilite.tex
+
+      # From here it is copied from : https://github.com/jonhue/pubtex-action
+      # with a few modifications
+      - name: Move PDFs
+        run: mv ./*.pdf dist
+        shell: bash
+      - name: Move index page
+        run: cp README.md dist/index.md
+        shell: bash
+      - uses: actions/upload-artifact@master
+        with:
+          name: pdfs-deploy
+          path: dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/download-artifact@master
+        with:
+          name: pdfs-deploy
+          path: dist
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: dist
+          allow_empty_commit: true
+          force_orphan: true
+          enable_jekyll: true
