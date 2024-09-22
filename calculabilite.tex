@@ -18,6 +18,8 @@
 
 \usepackage{caption}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,calc,positioning}
 
 \usepackage{xcolor}
 \hypersetup{
@@ -57,7 +59,6 @@
 
 	\HRule\\[1.5cm]
 
-
 	{\large\textit{Auteur}}\\
 	Yago \textsc{Iglesias}
 
@@ -72,4 +73,197 @@
 
 \tableofcontents
 
+\section{Introduction}
+
+
+Dans ce cours, on s'intéresse à la notion de calculabilité, mais pour cela, il faut comprendre ce qu'est un problème.
+D'une manière informelle, on peut voir un problème comme une fonction qui prend en entrée des données et retourne une réponse binaire.
+On fait la distinction entre un problème et une fonction qui, au lieu de retourner une réponse binaire, renvoie un nouvel ensemble de données.
+\begin{definition}
+	Un \textbf{problème} est une fonction $f: \Sigma^* \to \{0, 1\}$, où $\Sigma$ est un alphabet fini.
+\end{definition}
+
+\begin{remarque}
+	L'ensemble des problèmes est infini dénombrable et il est en bijection avec $\parts \Sigma^*$.
+\end{remarque}
+
+\begin{remarque}
+	L'ensemble des fonctions (en utilisant la définition de fonction donnée) est l'ensemble des fonctions $f: \Sigma^* \to \Sigma^*$ qui est infini non dénombrable,
+	et donc bien plus grand que l'ensemble des problèmes. De plus, l'ensemble des problèmes est un sous-ensemble de l'ensemble des fonctions à isomorphisme près.
+\end{remarque}
+
+Il nous manque maintenant la notion de programme pour pouvoir parler de calculabilité.
+
+En 1900, David Hilbert a posé 23 problèmes mathématiques qu'il considérait comme les plus importants de son époque. L'un de ces problèmes, le 10e, consistait à trouver
+une méthode (un nombre fini d'étapes) pour décider si une équation diophantienne a une solution entière. Cependant, aucune méthode n'a été trouvée, car il n'en existe pas.
+Pouvoir faire ce genre de démonstration relève de la calculabilité.
+
+Regardons quelques exemples de constructions qui sont normalement associées à la notion de programme :
+
+\begin{itemize}
+	\item Les langages de programmation comme Python, Java, C, etc. \circled 3
+	\item Le $\lambda$-calcul \circled 3
+	\item Les machines de Turing \circled 3
+	\item Les automates $\iff$ les expressions régulières \circled 1
+	\item Les automates à pile $\iff$ les grammaires hors-contexte \circled 2
+	\item Les automates à 2 ou plusieurs piles \circled 3
+	\item Les transducteurs
+\end{itemize}
+
+Ces constructions sont classées selon la hiérarchie de Chomsky \ref{fig:chomsky}.
+
+\begin{figure}[!htb]
+	\centering
+	% From: https://tex.stackexchange.com/questions/484541/nested-ellipses-in-tikzpicture-chomsky-hierarchy
+	\begin{tikzpicture}[font=\sffamily,breathe dist/.initial=2ex]
+		\foreach \X [count=\Y,remember=\Y as \LastY] in
+			{Régulières \circled 1, Hors contexte \circled 2, Context sensitive, Récursivement énumerables \circled 3}
+			{\ifnum\Y=1
+					\node[ellipse,draw,outer sep=0pt] (F-\Y) {\X};
+				\else
+					\node[anchor=south] (T-\Y) at (F-\LastY.north) {\X};
+					\path let \p1=($([yshift=\pgfkeysvalueof{/tikz/breathe dist}]T-\Y.north)-(F-\LastY.south)$),
+					\p2=($(F-1.east)-(F-1.west)$),\p3=($(F-1.north)-(F-1.south)$)
+					in ($([yshift=\pgfkeysvalueof{/tikz/breathe dist}]T-\Y.north)!0.5!(F-\LastY.south)$)
+					node[minimum height=\y1,minimum width={\y1*\x2/\y3},
+							draw,ellipse,inner sep=0pt] (F-\Y){};
+				\fi}
+	\end{tikzpicture}
+	\caption{Hiérarchie de Chomsky}
+	\label{fig:chomsky}
+\end{figure}
+
+
+La thèse de Church-Turing est une hypothèse qui postule que la seule notion de problème décidables est \circled 3.
+
+\section{Machines de Turing}
+
+\subsection{Définition}
+
+\begin{definition}[Machine de Turing]
+	Étant donné un alphabet $\Sigma$, une \textbf{machine de Turing} est un 6-uplet $M = (Q, \Gamma, \delta, q_0, q_a, q_r)$ où :
+	\begin{itemize}
+		\item $Q$ est un ensemble fini d'états
+		\item $\Gamma$ est un alphabet fini de symboles de ruban, et $\Sigma \subseteq \Gamma$
+		\item $\delta$ est la fonction de transition
+		      $$ \delta: \underbrace{Q}_{\text{État currant}} \times \underbrace{\Gamma}_{\text{Lit}} \to \underbrace{Q}_{\text{Nouveau état}} \times
+			      \underbrace{\Gamma}_{\text{Écrit}} \times \underbrace{\{R, L, N\}}_{\text{Direction}} $$
+		\item $q_0 \in Q$ est l'état initial
+		\item $q_a \in Q$ est l'état d'acceptation
+		\item $q_r \in Q$ est l'état de rejet
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Configuration]
+	Une \textbf{configuration} d'une machine de Turing est un triplet $(q, c, pos)$ où :
+	\begin{itemize}
+		\item $q \in Q$ est l'état courant
+		\item $c$ est le contenu du ruban
+		\item $pos$ est la position de la tête de lecture
+	\end{itemize}
+\end{definition}
+
+Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \Sigma^*$ ?
+
+\begin{enumerate}
+	\item On initialise le ruban
+	      \begin{figure}[!htb]
+		      \centering
+		      % Inspired from https://tex.stackexchange.com/questions/49839/turing-machine-figure
+		      \begin{tikzpicture}[every node/.style={block},
+				      block/.style={minimum height=1.5em,outer sep=0pt,draw,rectangle,node distance=0pt}]
+			      \node (A) {$w_0$};
+			      \node (B) [left=of A] {$B$};
+			      \node (C) [left=of B] {$\ldots$};
+			      \node (D) [right=of A] {$\ldots$};
+			      \node (E) [right=of D] {$w_n$};
+			      \node (F) [right=of E] {$B$};
+			      \node (G) [right=of F] {$\ldots$};
+			      \node (T) [below = 0.75cm of A] {$q_i$};
+			      \draw[-latex] (T) -- (A);
+			      \draw (C.north west) -- ++(-1cm,0) (C.south west) -- ++ (-1cm,0)
+			      (G.north east) -- ++(1cm,0) (G.south east) -- ++ (1cm,0);
+		      \end{tikzpicture}
+	      \end{figure}
+
+	\item Si on est dans l'état $q$, que la lettre sous la tête de lecture est $a$ et que $\delta(q, a) = (q', b, d)$, alors on fait :
+	      \begin{itemize}
+		      \item On écrit $b$ à la place de $a$
+		      \item On se déplace dans l'état $q'$
+		      \item On déplace la tête de lecture dans la direction $d$
+	      \end{itemize}
+	\item Si on arrive dans l'état $q_a$ ou $q_r$, alors on arrête l'exécution. Si on arrive dans l'état $q_a$, alors on accepte le mot $w$ et si on arrive dans l'état $q_r$, alors on rejette le mot $w$.
+\end{enumerate}
+
+
+\begin{notation}
+	Soit $M$ une machine de Turing, $w \in \Sigma^*$ un mot, alors on note $M(w)$ l'exécution de $M$ sur $w$. Cette exécution peut être :
+	\begin{itemize}
+		\item Acceptée : $M(w) = 1$
+		\item Rejetée : $M(w) = 0$
+		\item Bouclée : $M(w) = \bot$
+	\end{itemize}
+\end{notation}
+
+
+\begin{remarque}
+	Les automates s'injectent dans les machines de Turingm il suffit d'ignorer le ruban et de considérer que la tête de lecture est fixe.
+\end{remarque}
+
+\begin{definition}[Machine de Turing non déterministe]
+	De manière analogue aux automates la notion de \textbf{machine de Turing non déterministe} étend la définition d'une machine de Turing en
+	permettent d'avoir plusieurs transitions pour un état donné. La différence se trouve donc dans le type de la fonction de transition :
+
+	$$ \Delta: Q \times \Gamma \to \parts{Q \times \Gamma \times \{R, L, N\}}$$
+
+\end{definition}
+
+
+\subsection{Notion de calculabilité}
+
+
+\begin{definition}[Langage semi-décidable]
+	Un langage $L \subseteq \mots$ est \textbf{semi-décidable} s'il existe une machine de Turing $M$ \tlq
+	$$ \forall w \in \mots, w \in L \iff M(w) = 1 $$
+\end{definition}
+
+\begin{definition}[Langage décidable]
+	Un langage $L \subseteq \mots$ est \textbf{décidable} s'il existe une machine de Turing $M$ \tlq
+	$$ \forall w \in \mots, w \in L \implies M(w) = 1 \quad \text{et} \quad w \notin L \implies M(w) = 0 $$
+	et $M$ s'arrête pour tout $w$.
+\end{definition}
+
+\begin{prop}
+	Tout langage décidable est semi-décidable.
+\end{prop}
+
+\begin{proof}
+	Il suffit de monter que si $M$ est une machine de Turing qui décide $L$, alors $M(w) = 1 \iff w \in L$.
+	\begin{itemize}
+		\item $w \in L \implies M(w) = 1$ est vrai par définition.
+		\item $M(w) = 1 \implies w \in L$ peut être montrée par contraposée. Si $w \notin L$, alors $M(w) = 0$ car $M$ décide $L$ et donc $M(w) \neq 1$.
+	\end{itemize}
+\end{proof}
+
+\begin{definition}[Fonction calculable]
+	$f : \mots \to \mots$ est calculable si $\exists M$ \tq $\forall w \in \mots$ $M$ s'arrête sur $w$ avec $f(w)$ sur le ruban.
+\end{definition}
+
+\begin{lemme}
+	La fonction $succ : \mots \to \mots$ est calculable.
+\end{lemme}
+
+\begin{prop}
+	$L$ est décidable $\iff$ sa fonction caractéristique est calculable.
+\end{prop}
+
+\begin{definition}
+	$f : \mots \to \mots$ énumère $L \subseteq \mots$ si $\im f = L$ \ie $\forall w \in L \iff \exists w' \in \mots, f (w') = w$.
+\end{definition}
+
+\begin{prop}
+	$L$ est récursivement énumerable $\iff$ $L$ est décidable.
+\end{prop}
+
+\end{document}
 

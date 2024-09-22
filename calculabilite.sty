@@ -13,6 +13,10 @@
 \newcommand{\darkgreen}[1]{\textcolor{darkgreen}{#1}}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
 
+%% Functions
+
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
 %% Basic algebra
 
 \newcommand{\N}{\mathbb{N}}
@@ -123,7 +127,7 @@
 \theoremstyle{plain}
 \newtheorem{theorem}{Théorème}[section]
 \newtheorem{coro}[theorem]{Corollaire}
-\newtheorem{lemma}{Lemme}[section]
+\newtheorem{lemme}{Lemme}[section]
 \newtheorem{prop}{Proposition}[section]
 
 \theoremstyle{definition}
@@ -135,3 +139,9 @@
 \theoremstyle{plain}
 \newtheorem{remarque}{Remarque}[subsection]
 \newtheorem{rappel}{Rappel}[subsection]
+
+
+%% General stuff
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
