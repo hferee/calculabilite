@@ -11,13 +11,13 @@ jobs:
       - name: Checkout tree
         uses: actions/checkout@v4
 
+      - name: Go to the OCaml code
+        run: cd code/turing_machine
+
       - name: Install OCaml 5.1
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: 5.1
-
-      - name: Go to the OCaml code
-        run: cd code/turing_machine
 
       - name: Install dependencies
         run: opam install . --deps-only
@@ -36,13 +36,13 @@ jobs:
       - name: Checkout tree
         uses: actions/checkout@v4
 
+      - name: Go to the OCaml code
+        run: cd code/turing_machine
+
       - name: Install OCaml 5.1
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: 5.1
-
-      - name: Go to the OCaml code
-        run: cd code/turing_machine
 
       - name: Install dependencies
         run: opam install . --deps-only
