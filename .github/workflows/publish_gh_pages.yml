@@ -10,7 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
-      - uses: xu-cheng/latex-action@v3
+        with:
+          submodules: 'true'
+     - uses: xu-cheng/latex-action@v3
         with:
           root_file: calculabilite.tex
 
