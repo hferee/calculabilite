@@ -1,9 +1,6 @@
 name: Turing_machine code OCaml
 
-on:
-  pull_request:
-  push:
-    branches: ["master"]
+on: [push, pull_request]
 
 jobs:
   test:
