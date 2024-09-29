@@ -1,0 +1,64 @@
+
+\section{Introduction}
+
+
+Dans ce cours, on s'intéresse à la notion de calculabilité, mais pour cela, il faut comprendre ce qu'est un problème.
+D'une manière informelle, on peut voir un problème comme une fonction qui prend en entrée des données et retourne une réponse binaire.
+On fait la distinction entre un problème et une fonction qui, au lieu de retourner une réponse binaire, renvoie un nouvel ensemble de données.
+\begin{definition}
+	Un \textbf{problème} est une fonction $f: \Sigma^* \to \{0, 1\}$, où $\Sigma$ est un alphabet fini.
+\end{definition}
+
+\begin{remarque}
+	L'ensemble des problèmes est infini dénombrable et il est en bijection avec $\parts \Sigma^*$.
+\end{remarque}
+
+\begin{remarque}
+	L'ensemble des fonctions (en utilisant la définition de fonction donnée) est l'ensemble des fonctions $f: \Sigma^* \to \Sigma^*$ qui est infini non dénombrable,
+	et donc bien plus grand que l'ensemble des problèmes. De plus, l'ensemble des problèmes est un sous-ensemble de l'ensemble des fonctions à isomorphisme près.
+\end{remarque}
+
+Il nous manque maintenant la notion de programme pour pouvoir parler de calculabilité.
+
+En 1900, David Hilbert a posé 23 problèmes mathématiques qu'il considérait comme les plus importants de son époque. L'un de ces problèmes, le 10e, consistait à trouver
+une méthode (un nombre fini d'étapes) pour décider si une équation diophantienne a une solution entière. Cependant, aucune méthode n'a été trouvée, car il n'en existe pas.
+Pouvoir faire ce genre de démonstration relève de la calculabilité.
+
+Regardons quelques exemples de constructions qui sont normalement associées à la notion de programme :
+
+\begin{itemize}
+	\item Les langages de programmation comme Python, Java, C, etc. \circled 3
+	\item Le $\lambda$-calcul \circled 3
+	\item Les machines de Turing \circled 3
+	\item Les automates $\iff$ les expressions régulières \circled 1
+	\item Les automates à pile $\iff$ les grammaires hors-contexte \circled 2
+	\item Les automates à 2 ou plusieurs piles \circled 3
+	\item Les transducteurs
+\end{itemize}
+
+Ces constructions sont classées selon la hiérarchie de Chomsky \ref{fig:chomsky}.
+
+\begin{figure}[!htb]
+	\centering
+	% From: https://tex.stackexchange.com/questions/484541/nested-ellipses-in-tikzpicture-chomsky-hierarchy
+	\begin{tikzpicture}[font=\sffamily,breathe dist/.initial=2ex]
+		\foreach \X [count=\Y,remember=\Y as \LastY] in
+			{Régulières \circled 1, Hors contexte \circled 2, Context sensitive, Récursivement énumerables \circled 3}
+			{\ifnum\Y=1
+					\node[ellipse,draw,outer sep=0pt] (F-\Y) {\X};
+				\else
+					\node[anchor=south] (T-\Y) at (F-\LastY.north) {\X};
+					\path let \p1=($([yshift=\pgfkeysvalueof{/tikz/breathe dist}]T-\Y.north)-(F-\LastY.south)$),
+					\p2=($(F-1.east)-(F-1.west)$),\p3=($(F-1.north)-(F-1.south)$)
+					in ($([yshift=\pgfkeysvalueof{/tikz/breathe dist}]T-\Y.north)!0.5!(F-\LastY.south)$)
+					node[minimum height=\y1,minimum width={\y1*\x2/\y3},
+							draw,ellipse,inner sep=0pt] (F-\Y){};
+				\fi}
+	\end{tikzpicture}
+	\caption{Hiérarchie de Chomsky}
+	\label{fig:chomsky}
+\end{figure}
+
+
+La thèse de Church-Turing est une hypothèse qui postule que la seule notion de problème décidables est \circled 3.
+

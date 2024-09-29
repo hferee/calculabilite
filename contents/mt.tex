@@ -1,0 +1,203 @@
+
+\section{Machines de Turing}
+
+\subsection{Définition}
+
+\begin{definition}[Machine de Turing]
+	Étant donné un alphabet $\Sigma$, une \textbf{machine de Turing} est un 6-uplet $M = (Q, \Gamma, \delta, q_0, q_a, q_r)$ où :
+	\begin{itemize}
+		\item $Q$ est un ensemble fini d'états
+		\item $\Gamma$ est un alphabet fini de symboles de ruban, et $\Sigma \subseteq \Gamma$
+		\item $\delta$ est la fonction de transition
+		      $$ \delta: \underbrace{Q}_{\text{État currant}} \times \underbrace{\Gamma}_{\text{Lit}} \to \underbrace{Q}_{\text{Nouveau état}} \times
+			      \underbrace{\Gamma}_{\text{Écrit}} \times \underbrace{\{R, L, N\}}_{\text{Direction}} $$
+		\item $q_0 \in Q$ est l'état initial
+		\item $q_a \in Q$ est l'état d'acceptation
+		\item $q_r \in Q$ est l'état de rejet
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Configuration]
+	Une \textbf{configuration} d'une machine de Turing est un triplet $(q, c, pos)$ où :
+	\begin{itemize}
+		\item $q \in Q$ est l'état courant
+		\item $c$ est le contenu du ruban
+		\item $pos$ est la position de la tête de lecture
+	\end{itemize}
+\end{definition}
+
+Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \Sigma^*$ ?
+
+\begin{enumerate}
+	\item On initialise le ruban
+	      \begin{figure}[!htb]
+		      \centering
+		      % Inspired from https://tex.stackexchange.com/questions/49839/turing-machine-figure
+		      \begin{tikzpicture}[every node/.style={block},
+				      block/.style={minimum height=1.5em,outer sep=0pt,draw,rectangle,node distance=0pt}]
+			      \node (A) {$w_0$};
+			      \node (B) [left=of A] {$B$};
+			      \node (C) [left=of B] {$\ldots$};
+			      \node (D) [right=of A] {$\ldots$};
+			      \node (E) [right=of D] {$w_n$};
+			      \node (F) [right=of E] {$B$};
+			      \node (G) [right=of F] {$\ldots$};
+			      \node (T) [below = 0.75cm of A] {$q_i$};
+			      \draw[-latex] (T) -- (A);
+			      \draw (C.north west) -- ++(-1cm,0) (C.south west) -- ++ (-1cm,0)
+			      (G.north east) -- ++(1cm,0) (G.south east) -- ++ (1cm,0);
+		      \end{tikzpicture}
+	      \end{figure}
+
+	\item Si on est dans l'état $q$, que la lettre sous la tête de lecture est $a$ et que $\delta(q, a) = (q', b, d)$, alors on fait :
+	      \begin{itemize}
+		      \item On écrit $b$ à la place de $a$
+		      \item On se déplace dans l'état $q'$
+		      \item On déplace la tête de lecture dans la direction $d$
+	      \end{itemize}
+	\item Si on arrive dans l'état $q_a$ ou $q_r$, alors on arrête l'exécution. Si on arrive dans l'état $q_a$, alors on accepte le mot $w$ et si on arrive dans l'état $q_r$, alors on rejette le mot $w$.
+\end{enumerate}
+
+
+\begin{notation}
+	Soit $M$ une machine de Turing, $w \in \Sigma^*$ un mot, alors on note $M(w)$ l'exécution de $M$ sur $w$. Cette exécution peut être :
+	\begin{itemize}
+		\item Acceptée : $M(w) = 1$
+		\item Rejetée : $M(w) = 0$
+		\item Bouclée : $M(w) = \bot$
+	\end{itemize}
+\end{notation}
+
+
+\begin{remarque}
+	Les automates s'injectent dans les machines de Turingm il suffit d'ignorer le ruban et de considérer que la tête de lecture est fixe.
+\end{remarque}
+
+\begin{definition}[Machine de Turing non déterministe]
+	De manière analogue aux automates la notion de \textbf{machine de Turing non déterministe} étend la définition d'une machine de Turing en
+	permettent d'avoir plusieurs transitions pour un état donné. La différence se trouve donc dans le type de la fonction de transition :
+
+	$$ \Delta: Q \times \Gamma \to \parts{Q \times \Gamma \times \{R, L, N\}}$$
+
+\end{definition}
+
+
+\subsection{Notion de calculabilité}
+
+
+\begin{definition}[Langage semi-décidable]
+	Un langage $L \subseteq \mots$ est \textbf{semi-décidable} s'il existe une machine de Turing $M$ \tlq
+	$$ \forall w \in \mots, w \in L \iff M(w) = 1 $$
+\end{definition}
+
+\begin{definition}[Langage décidable]
+	Un langage $L \subseteq \mots$ est \textbf{décidable} s'il existe une machine de Turing $M$ \tlq
+	$$ \forall w \in \mots, w \in L \implies M(w) = 1 \quad \text{et} \quad w \notin L \implies M(w) = 0 $$
+	et $M$ s'arrête pour tout $w$.
+\end{definition}
+
+\begin{prop}
+	Tout langage décidable est semi-décidable.
+\end{prop}
+
+\begin{proof}
+	Il suffit de monter que si $M$ est une machine de Turing qui décide $L$, alors $M(w) = 1 \iff w \in L$.
+	\begin{itemize}
+		\item $w \in L \implies M(w) = 1$ est vrai par définition.
+		\item $M(w) = 1 \implies w \in L$ peut être montrée par contraposée. Si $w \notin L$, alors $M(w) = 0$ car $M$ décide $L$ et donc $M(w) \neq 1$.
+	\end{itemize}
+\end{proof}
+
+\begin{definition}[Fonction calculable]
+	$f : \mots \to \mots$ est calculable si $\exists M$ \tq $\forall w \in \mots$ $M$ s'arrête sur $w$ avec $f(w)$ sur le ruban.
+\end{definition}
+
+\begin{lemme}
+	La fonction $succ : \mots \to \mots$ est calculable.
+\end{lemme}
+
+\begin{prop}
+	$L$ est décidable $\iff$ sa fonction caractéristique est calculable.
+\end{prop}
+
+\begin{definition}
+	$f : \mots \to \mots$ énumère $L \subseteq \mots$ si $\im f = L$ \ie $\forall w \in L \iff \exists w' \in \mots, f (w') = w$.
+\end{definition}
+
+\begin{prop}
+	$L$ est récursivement énumerable $\iff$ $L$ est décidable.
+\end{prop}
+
+On peut encoder toute machine de Turin par un nombre, qui est appété le nombre de Gödel et noté : $\encode M \in \mots$.
+
+\begin{definition}[Énumération des fonctions calculables]
+	$\forall n \in \N, \ \phi_n$ est la fonction calculée par la $n$-ième machine de Turing.
+	$$\phi_{\encode M} (w) = M (w)$$
+\end{definition}
+
+\subsection{Quelques problèmes}
+
+Quelques problèmes décidables en rapport aux automates :
+
+\begin{itemize}
+	\item $\text{ACCEPT}_A = \setdef {<A,w>} {A \text {est un automate qui accepte } w}$.
+	      Dire que c'est problème est décidable revient a dire que $\exists$ un interpréteur d'automates en Machine de Turing.
+	\item $\text{EQUIV}_A = \setdef {<A,A'>} {A \text { et } A' \text{ acceptent le meme langage}}$.
+	\item $\text{EXISTS}_A = $ Il existe un mot reconnu.
+	\item $\text{INFINITE}_A = $ l'automate est infini.
+\end{itemize}
+
+Cependant, ces problèmes étendus aux automates a piles, ne restent pas tous décidable.
+$\text{ACCEPT}_{A_p}$ et $\text{INFINITE}_{A_p}$ restent décidables mais pas $\text{EQUIV}_{A_p}$.
+
+\begin{definition}[Problème de l'arrêt]
+	Le problème de l'arrêt est définit comme suit $HALT = \setdef {\encode{M,w}} {M \text{ s'arrête sur } w}$.
+\end{definition}
+
+\begin{lemme}[Machines universelles]
+	Il existe une machine universelle $U$, \ie, $$\forall M,w, \  U (\encode {M,w}) = M (w)$$
+	ou de manière equivalente
+	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
+	lemme\end{lemme}
+
+\begin{proof}
+	Admisse.
+\end{proof}
+
+\begin{prop}
+	$HALT$ est semi-décidable.
+\end{prop}
+
+\begin{proof}
+	Il suffit d'écrire un programme "impératif" :
+
+	Entrée : $\encode {M,w}$
+
+	Code:
+	u(M,w);
+	return 1;
+
+\end{proof}
+
+\begin{prop}
+	HALT est indécidable.
+\end{prop}
+
+\begin{proof}
+	Supposons par l'absurde que HALT est décidable. Alors il existe un entier $n$ \tq $\phi_n$ décide HALT, c'est-à-dire
+	$ \phi_n(\encode {M, w} ) = 1 \iff \phi_n(w) \neq \bot $ et vaut $0$ sinon.
+
+	Soit $n'$ le code de la fonction qui sur $w$ vaut 1 si $\phi_n (w,w) = 0 $ et n'est pas définie sinon. Alors
+	\begin{eqnarray*}
+		\phi_{n'}(n') = 1 & \text{si} & \phi_n(n',n') = 0\\
+		&\text{\ie}& \phi_{n'}(n') \text{ ne s'arrête pas} \\
+		&\text{\ie}& \phi_{n'}(n') = \bot
+	\end{eqnarray*}
+
+
+	\begin{eqnarray*}
+		\phi_{n'}(n') = \bot & \text{si} & \phi_n(n',n') = 1\\
+		&\text{\ie}& \phi_{n'}(n') \neq \bot \quad \lightning
+	\end{eqnarray*}
+
+\end{proof}
