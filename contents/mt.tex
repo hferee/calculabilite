@@ -112,9 +112,9 @@ Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \S
 	$f : \mots \to \mots$ est calculable si $\exists M$ \tq $\forall w \in \mots$ $M$ s'arrête sur $w$ avec $f(w)$ sur le ruban.
 \end{definition}
 
-\begin{lemme}
+\begin{lemma}
 	La fonction $succ : \mots \to \mots$ est calculable.
-\end{lemme}
+\end{lemma}
 
 \begin{prop}
 	$L$ est décidable $\iff$ sa fonction caractéristique est calculable.
@@ -154,11 +154,11 @@ $\text{ACCEPT}_{A_p}$ et $\text{INFINITE}_{A_p}$ restent décidables mais pas $\
 	Le problème de l'arrêt est définit comme suit $HALT = \setdef {\encode{M,w}} {M \text{ s'arrête sur } w}$.
 \end{definition}
 
-\begin{lemme}[Machines universelles]
+\begin{lemma}[Machines universelles]
 	Il existe une machine universelle $U$, \ie, $$\forall M,w, \  U (\encode {M,w}) = M (w)$$
 	ou de manière equivalente
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
-	lemme\end{lemme}
+	lemma\end{lemma}
 
 \begin{proof}
 	Admisse.
