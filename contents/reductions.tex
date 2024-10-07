@@ -1,0 +1,84 @@
+\section{Réductions}
+
+\subsection{Réduction many-one}
+
+\begin{definition}[Réduction many-one]
+	$A \leqm B$ \ssi $\exists \fmots f$ calculable et totale \tlq
+	$$\forall w \in \alphabet, w \in A \iff f(w) \in B$$
+\end{definition}
+
+
+\begin{theorem} \label{thm:leqm_dec}
+	$A \leqm B$ et $B$ est décidable, alors $A$ est décidable
+\end{theorem}
+
+\begin{proof}
+
+	Soit $M_B$ la machine qui reconnait $B$ et $M_f$ celle qui calcule $f$. Alors
+	\begin{eqnarray*}
+		\forall w \in \mots, w \in A &\iff& f(w) \in B \\
+		&\iff& M_B (M_f (w)) = 1 \\
+		&\iff& M_A \text{ accepte } w
+	\end{eqnarray*}
+
+	et de manière analogue
+
+	\begin{eqnarray*}
+		\forall w \notin \mots, w \notin A &\iff& f(w) \notin B \\
+		&\iff& M_B (M_f (w)) = 0 \\
+		&\iff& M_A \text{ rejette } w
+	\end{eqnarray*}
+
+
+\end{proof}
+
+
+\begin{coro}
+	$A \leqm B$ et $A$ n'est pas décidable, alors $B$ n'est l'est pass non plus
+\end{coro}
+
+\begin{proof}
+	C'est la contraposée du théorème precedent.
+\end{proof}
+
+\begin{theorem}
+	$A \leqm B$ et $B$ est semi-décidable, alors $A$ est semi-décidable
+\end{theorem}
+
+\begin{proof}
+	Voir \ref{thm:leqm_dec}
+\end{proof}
+
+\begin{theorem}
+	$A \leqm B$ et $B$ est co semi-décidable, alors $A$ est co semi-décidable
+\end{theorem}
+
+\begin{proof}
+	Si $A \leqm B$ alors $\overline A \leqm \overline B$ car
+	\begin{eqnarray*}
+		w \notin A &\iff& f(w) \notin A \\
+		&\iff& A \leqm B
+	\end{eqnarray*}
+\end{proof}
+
+\begin{definition}
+	$A \equivm B \iff A \leqm B \et N \leqm A$
+\end{definition}
+
+\subsection{Classes d'équivalence sous many-one}
+
+\begin{definition}[Many-one complet]
+	$L$ est many-one complet pour une classe de langages $\mathcal C$ si $\forall L' \in \mathcal C, L' \leqm L$
+\end{definition}
+
+\begin{prop}[Problème de Post]
+	HALT est re-complet
+\end{prop}
+
+\begin{proof}
+	Soit $L$ un langage sémi-décidable. Montrons que $L \leqm $ HALT. Soit $M_L$ la machine qui sémi-décide $L$.
+
+	Soit $M_L'(w)$ la machine qui exécute $M_L$ sur $w$ et qui boucle si le résultat de $M_L$ est 1. Alors on a que
+	$w \in L \iff M_L'(w) \neq \bot \iff \encode {M_L', w} \in \halt$
+	Ainsi, $L \leqm \halt$.
+\end{proof}

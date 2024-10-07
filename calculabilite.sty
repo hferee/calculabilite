@@ -1,5 +1,7 @@
 \usepackage{base-yago/base-yago}
 
+
+
 %% Turing Machines
 
 \newcommand{\encode}[1]{\left\langle#1\right\rangle}
@@ -33,10 +35,24 @@
 \newcommand{\lang}[1]{\mathcal{L}\left(#1\right)}
 \newcommand{\langstar}{\kleene{\lang}}
 
+
+\newcommand{\leqm}{\leq_m}
+\newcommand{\equivm}{\equiv_m}
+
+\newcommand{\fmots}[1]{#1 : \mots \to \mots}
+
+\newcommand{\halt}{\text{ HALT }}
+
+\newcommand{\universal}[2]{\mathcal U \left(#1,#2\right)}
+
 %%%% Regex
 
 \newcommand{\eratsym}{ERat}
 \newcommand{\erat}{\text{\eratsym}}
+
+%% ocaml
+
+\newcommand{\letin}[2]{\text{\violet{let} } #1 = #2 \text{ \violet{in} }}
 
 %% General stuff
 
