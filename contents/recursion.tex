@@ -9,7 +9,7 @@
 \end{theorem}
 
 \begin{theorem}[de point fixe]
-	Si $ \fmots f$ \emph{calculable} et \emph {totale}. Alors il existe $e \ in \mots$ \tq $\phi_e = \phi_{f(e)}$.
+	Si $ \fmots f$ \emph{calculable} et \emph {totale}. Alors il existe $e \in \mots$ \tq $\phi_e = \phi_{f(e)}$.
 \end{theorem}
 
 
@@ -19,11 +19,11 @@
 	On pose $h(x) = s(\encode G, x)$ (le $s$ du théorème precedent). On a que $f \circ h$ est calculable te totale et notons son coed $c$. Alors
 
 	\begin{eqnarray*}
-		\phi_{h(c)} (w) &=& \phi_{s(\encode G, c)} (w) \text{ par définition de h} \\
-		&=& \phi_{\encode G} (\encode {c, w}) \text{ par \ref{thm:it}} \\
-		&=& G (\encode {c, w}) \text{ correspondence énumeration machine }\\
-		&=& \letin e {\universal c c} \universal e y \text{ par définition de $G$ }\\
-		&=& \phi_{f \circ h (c) } (w) \text{car } \universal c c = \phi_c(c) = f \circ h (c) \text{ par définition}
+		\phi_{h(c)} (w) &=& \phi_{s(\encode G, c)} (w) \reason{par définition de $h$} \\
+		&=& \phi_{\encode G} (\encode {c, w}) \reason{par \ref{thm:it}} \\
+		&=& G (\encode {c, w}) \reason{correspondence énumeration machine }\\
+		&=& \letin e {\universal c c} \universal e y \reason{par définition de $G$ }\\
+		&=& \phi_{f \circ h (c)}(w) \reason{car $\universal c c = \phi_c(c) = f \circ h (c)$ par définition}
 	\end{eqnarray*}
 	Donc $\phi_{h(c)} = \phi_{f \circ h (c)}$ et donc $h(c)$ est notre point fixe.
 \end{proof}
@@ -38,9 +38,5 @@
 \begin{proof}
 	Soit $M_f$ une machine qui calcule $f$ et $\fmots , \ g(p) = s(\encode {M_f}, p)$
 	Alors on applique le théorème de point fixe à $g$ et on a qu'il existe $e$ \tq $\phi_e(w)
-		=\phi_{s(\encode{M_f},e)} (w) = \phi_{\encode {M_f}} (e,w)$.
-	$e = \encode R, \ \phi_e (w) = f(e,w)$
-    %TODO: This does not seem right, I need to check this
+		=\phi_{s(\encode{M_f},e)} (w) = \phi_{\encode {M_f}} (e,w) = f(e,w)$
 \end{proof}
-
-
