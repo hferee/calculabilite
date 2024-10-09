@@ -50,13 +50,13 @@
 
 On peut encoder toute machine de Turin par un nombre, qui est appété le nombre de Gödel et noté : $\encode M \in \mots$.
 
-\begin{definition}[Énumération des fonctions calculables]
+\begin{definition}[Énumération des fonctions calculables] \label{def:enum}
 	$\forall n \in \N, \ \phi_n$ est la fonction calculée par la $n$-ième machine de Turing.
 	$$\phi_{\encode M} (w) = M (w)$$
 \end{definition}
 
 
-\begin{lemma}[Machines universelles]
+\begin{lemma}[Machines universelles]\label{lem:univ}
 	Il existe une machine universelle $U$, \ie, $$\forall M,w, \  U (\encode {M,w}) = M (w)$$
 	ou de manière equivalente
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
@@ -112,13 +112,9 @@ $\text{ACCEPT}_{A_p}$ et $\text{INFINITE}_{A_p}$ restent décidables mais pas $\
 	\begin{eqnarray*}
 		\phi_{n'}(n') = 1 & \text{si} & \phi_n(n',n') = 0\\
 		&\text{\ie}& \phi_{n'}(n') \text{ ne s'arrête pas} \\
-		&\text{\ie}& \phi_{n'}(n') = \bot
-	\end{eqnarray*}
-
-
-	\begin{eqnarray*}
+		&\text{\ie}& \phi_{n'}(n') = \bot\\\\
 		\phi_{n'}(n') = \bot & \text{si} & \phi_n(n',n') = 1\\
-		&\text{\ie}& \phi_{n'}(n') \neq \bot \quad \lightning
+		&\text{\ie}& \phi_{n'}(n') \neq \bot \quad \contradict
 	\end{eqnarray*}
 
 \end{proof}
