@@ -4,7 +4,7 @@
 \begin{theorem}[d'itération / Smn / d'application partielle]\label{thm:it}
 	Il existe une fonction calculable et totale $s$ \tlq
 	$$\forall n,m,w, \phi_{s(n,m)}(w) = \phi_m(\encode {n,w})$$
-
+    %TODO: Is roder correct ? 
 	Si $m$ est le code d'un programme et $n$ un mot, alors $s(n,m)$ est le code de l'application partielle de $\phi_m$ à $n$.
 \end{theorem}
 
@@ -38,7 +38,7 @@
 
 
 \begin{proof}
-	Soit $M_f$ une machine qui calcule $f$ et $\fmots , \ g(p) = s(\encode {M_f}, p)$
+	Soit $M_f$ une machine qui calcule $f$ et $\fmots g, \ g(p) = s(\encode {M_f}, p)$
 	Alors on applique le théorème de point fixe à $g$ et on a qu'il existe $e$ \tq $\phi_e(w)
 		=\phi_{s(\encode{M_f},e)} (w) = \phi_{\encode {M_f}} (e,w) = f(e,w)$
 \end{proof}
@@ -63,4 +63,14 @@
 	Et donc $L$ n'est pas décidable.
 \end{proof}
 
+
+
+\begin{prop}
+    Il existe un Quine. \ie une machine $M$ \tq : 
+    $$\forall w, M(w) = \encode M$$
+\end{prop}
+
+\begin{proof}
+    On applique le théorème de récursion avec la fonction $f(e, \_) = e$. Donc $\exists R, \, R(w) = f(\encode R, w) = \encode R$.
+\end{proof}
 

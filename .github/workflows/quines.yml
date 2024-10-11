@@ -1,0 +1,27 @@
+name: Quines code OCaml
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tree
+        uses: actions/checkout@v4
+
+      - name: Install OCaml 5.1
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: 5.1
+
+      - name: Install dependencies
+        run: cd code/quines && opam install . --deps-only
+
+      - name: Build
+        run: cd code/quines && opam exec -- dune build
+
+      - name: Test
+        run: cd code/quines && ./test.sh "opam exec -- dune exec quines" "bin/main.ml"
+
