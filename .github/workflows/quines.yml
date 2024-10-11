@@ -1,10 +1,10 @@
-name: Quines code OCaml
+name: Quines
 
 on: [push, pull_request]
 
 jobs:
   test:
-    name: Test
+    name: Test quines
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,9 @@ jobs:
       - name: Build
         run: cd code/quines && opam exec -- dune build
 
-      - name: Test
+      - name: Test Ocaml
         run: cd code/quines && ./test.sh "opam exec -- dune exec quines" "bin/main.ml"
+
+      - name: Test Python
+        run: cd code/quines && ./test.sh "python3 quines.py" "quines.py"
 
