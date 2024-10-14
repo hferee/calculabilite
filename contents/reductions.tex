@@ -34,11 +34,11 @@
 
 
 \begin{coro}
-	$A \leqm B$ et $A$ n'est pas décidable, alors $B$ n'est l'est pass non plus
+	$A \leqm B$ et $A$ n'est pas décidable, alors $B$ n'est l'est pas non plus.
 \end{coro}
 
 \begin{proof}
-	C'est la contraposée du théorème precedent.
+	C'est la contraposée du théorème précédent.
 \end{proof}
 
 \begin{theorem}
@@ -50,7 +50,7 @@
 \end{proof}
 
 \begin{theorem}
-	$A \leqm B$ et $B$ est co semi-décidable, alors $A$ est co semi-décidable
+	$A \leqm B$ et $B$ est co-semi-décidable, alors $A$ est co-semi-décidable.
 \end{theorem}
 
 \begin{proof}
@@ -62,7 +62,7 @@
 \end{proof}
 
 \begin{definition}
-	$A \equivm B \iff A \leqm B \et N \leqm A$
+	$A \equivm B \iff A \leqm B \et B \leqm A$
 \end{definition}
 
 \subsection{Classes d'équivalence sous many-one}
@@ -72,13 +72,13 @@
 \end{definition}
 
 \begin{prop}[Problème de Post]
-	HALT est re-complet
+	HALT est RE-complet.
 \end{prop}
 
 \begin{proof}
 	Soit $L$ un langage sémi-décidable. Montrons que $L \leqm $ HALT. Soit $M_L$ la machine qui sémi-décide $L$.
 
-	Soit $M_L'(w)$ la machine qui exécute $M_L$ sur $w$ et qui boucle si le résultat de $M_L$ est 1. Alors on a que
-	$w \in L \iff M_L'(w) \neq \bot \iff \encode {M_L', w} \in \halt$
+	Soit $M_L'(w)$ la machine qui exécute $M_L$ sur $w$ et qui boucle si le résultat de $M_L$ est 1. 
+	Alors on a que $w \in L \iff M_L'(w) \neq \bot \iff \encode {M_L', w} \in \halt$
 	Ainsi, $L \leqm \halt$.
 \end{proof}
