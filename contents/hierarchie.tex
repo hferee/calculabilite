@@ -4,3 +4,56 @@
 %TODO: Add 
 Formules arithmétiques du premier ordre sous forme prénexe.
 
+
+\begin{definition}[Saut de Turing]
+	$X$ est un langage,
+
+	$X' = \setdef c {\phi_c^X(c) \text{ est défini}} = \setdef {\encode M} {M^X \text{ s'arrete sur } \encode M}$
+
+	$\phi_{c \in \mots}$ : énumeration des fonctions calculables.
+
+	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement a $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
+\end{definition}
+
+
+\begin{exemple}
+	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrete sur } \encode M} \equivm \halt$$
+\end{exemple}
+
+\begin{exercice}
+	Montrer que $\emptyset '$ est $\Sigma_1$-complet :
+	\begin{enumerate}
+		\item $\emptyset' \in \Sigma_1$
+		\item $\forall L \in \Sigma_1, L \leqm \emptyset'$
+	\end{enumerate}
+\end{exercice}
+
+
+\begin{lemma}
+	Si $A$ est $C$-complet:  $\exists Y$ tel que $X$ est $re(Y)$ avec $Y \in C$ $\iff$ $X$ est $re(A)$.
+\end{lemma}
+
+\begin{theorem} [de post]
+	Nous avons les résultats suivants :
+	\begin{enumerate}
+		\item
+		      \begin{enumerate}
+			      \item
+			            \begin{eqnarray*}
+				            L \in \Sigma_{n+1} &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n  \\
+				            &\iff& L \text{ est r.e. relativement  un langage }  \Sigma_{n}
+			            \end{eqnarray*}
+
+			      \item
+			            \begin{eqnarray*}
+				            L \in \Pi_{n+1} &\iff& L \text{ est co-r.e. relativement  un langage }  \Sigma_n  \\
+				            &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n
+			            \end{eqnarray*}
+		      \end{enumerate}
+
+		\item Il existe un langage $\Sigma_n$ complet, noté $\emptyset^{(n)}$.
+	\end{enumerate}
+\end{theorem}
+
+TODO
+
