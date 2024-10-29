@@ -52,24 +52,31 @@
 
 
 \begin{proof}
-	Soit $L = \setdef {\encode M} {P(L_M)}$, avec $\encode {M_{loop}} \in L \et \encode{M_2} \notin L$.
+	Soit $L = \setdef {\encode M} {P(L_M)}$.
+	Sans perte de généralité, supposons $P(\emptyset)$, \ie $\encode {M_{loop}} \in L$.
+	On peut faire ceci car, dans le cas ou $\lnot P (\emptyset)$, alors on considère $\bar L$.
 
-	Sands perte de généralité, supposons $P(\emptyset)$, \ie $\encode {M_{loop}} \in L$ car si
-	$\lnot P (\emptyset)$, alors on considère $\bar L$ %TODO: Explain ?
+	Alors $\encode {M_{loop}} \in L \et \exists \encode{M_2} \notin L$, car $P$ est non triviale.
 
 	Montrons que $\overline {\halt} \leqm L$.
-	Pour tout $w$ on pose $M' = \textbf{fun } u -> M(w); M_2(u)$. Alors $M(w) = \bot \iff \lang M = \emptyset \iff M_L (M') = 1$.
-	Et donc $L$ n'est pas décidable.
+    Soit $M$ une machine de Turing, pour tout $w$ on pose
+	$$M' = \fun u {M(w); M_2(u)}$$
+	Alors
+	\begin{eqnarray*}
+		M(w) = \bot &\iff& \lang M = \emptyset \\
+		&\iff& M_L (M') = 1
+	\end{eqnarray*}
+    Donc $\overline {\halt} \leqm L$ et ainsi $L$ n'est pas décidable.
 \end{proof}
 
 
 
 \begin{prop}
-    Il existe un Quine. \ie une machine $M$ \tq : 
-    $$\forall w, M(w) = \encode M$$
+	Il existe un Quine. \ie une machine $M$ \tq :
+	$$\forall w, M(w) = \encode M$$
 \end{prop}
 
 \begin{proof}
-    On applique le théorème de récursion avec la fonction $f(e, \_) = e$. Donc $\exists R, \, R(w) = f(\encode R, w) = \encode R$.
+	On applique le théorème de récursion avec la fonction $f(e, \_) = e$. Donc $\exists R, \, R(w) = f(\encode R, w) = \encode R$.
 \end{proof}
 
