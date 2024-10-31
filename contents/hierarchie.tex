@@ -1,45 +1,15 @@
 \section{Hiérarchie arithmétique}
 
 
-Dans cette sections nous allons étudier les formules arithmétiques du premier ordre sous forme prenexe et comment les classifier.
+Dans cette sections nous allons étudier les $\underbrace{\text{formules}}_{\land, \lor, \lnot}$
+$\underbrace{\text{arithmétiques}}_{\N, +, *, \leq, \text{S}}$ du $\underbrace{\text{premier ordre}}_{\exists x, \forall x}$
+sous forme prenexe et comment les classifier.
 
 
+\begin{definition}[Forme prenexe]
+	Une formule est sous forme prenexe si tous ses quantificateurs non bornés sont "à gauche".
 
-\begin{definition}[Formules arithmétiques du premier ordre]
-	Les formules arithmétiques du premier ordre sous forme prenexe sont construites selon la grammaire suivante :
-
-	\begin{syntaxdef}
-		\syntaxHeader {v} {x,y,z,x_1,y_1,z_1,\ldots} {Variables}
-	\end{syntaxdef}
-
-	\begin{syntaxdef}
-		\syntaxHeader {e} {v} {Variable}
-		\syntax {0,1,2,3,4,\ldots} {Nombre dans $\N$}
-		\syntax {e + e} {Addition}
-		\syntax {e * e} {Multiplication}
-		\syntax {S(e)} {Fonction successeur}
-	\end{syntaxdef}
-
-	\begin{syntaxdef}
-		\syntaxHeader {\phi} {e \leq e} {Variables}
-		\syntax {\phi \land \phi} {Conjonction}
-		\syntax {\phi \lor \phi} {Disjonction}
-		\syntax {\lnot \phi} {Négation}
-		\syntax {(\phi)} {Expressions parenthésées}
-	\end{syntaxdef}
-
-	\begin{syntaxdef}
-		\syntaxHeader {\psi} {\phi} {Formule sans quantificateur}
-		\syntax {\exists x \psi} {Quantificateur existentiel}
-		\syntax {\forall x \psi} {Quantificateur universel}
-	\end{syntaxdef}
-
-
-	Une formule est prenexe si tous ses quantificateurs "à gauche".
-	$(\forall x (x \leq 2)) \land  (\forall y (2 \leq y))$ n'est pas sous forme prenexe mais
-	$(\forall x \forall y ((x \leq 2) \land  (2 \leq x))$ l'est.
-
-	Ainsi, toute formule $\psi$ est prenexe par construction.
+	$(\forall x (x \leq 2)) \land  (\forall y (2 \leq y))$ n'est pas sous forme prenexe mais $(\forall x \forall y ((x \leq 2) \land  (2 \leq x))$ l'est.
 \end{definition}
 
 
