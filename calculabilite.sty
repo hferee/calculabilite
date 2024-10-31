@@ -39,6 +39,10 @@
 \newcommand{\leqm}{\leq_m}
 \newcommand{\equivm}{\equiv_m}
 
+
+\newcommand{\leqt}{\leq_T}
+\newcommand{\equivt}{\equiv_T}
+
 \newcommand{\fmots}[1]{#1 : \mots \to \mots}
 
 \newcommand{\halt}{\text{ HALT }}
@@ -62,3 +66,10 @@
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\syntaxHeader}[3]{#1 &::=& #2 &\quad\text{#3}\\}
+\newcommand{\syntaxExtension}[1]{\syntaxHeader{#1}{\cdots}{}}
+\newcommand{\syntax}[2]{&|&#1&\quad\text{#2}\\}
+
+\newenvironment{syntaxdef} {\begin{mathpar} \begin{array}{lcll}} {\end{array} \end{mathpar}}
+
