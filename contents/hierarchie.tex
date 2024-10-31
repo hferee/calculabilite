@@ -28,6 +28,17 @@ sous forme prenexe et comment les classifier.
 	Autrement dit, $\Sigma_n$ est l'ensemble de formules avec $n$ quantificateurs alternés qui commence par un quantificateur existentiel.
 \end{definition}
 
+\begin{remarque}
+	Dans la définition precedente, les formules de la forme $\forall x \forall y \ldots$ ne sont pas prises en compte. Ceci est du au fait que, grace 
+    au lemme suivant, les quantificateurs égaux qui se suivent peuvent être regroupés en un seul.
+\end{remarque}
+
+\begin{lemma}(Admis)
+	Pour tout $\phi$ il existe $\phi_1$ et $\phi_2$ tels que :
+	$$ \forall x_1, \forall x_2 \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
+	Le meme résultat peut être obtenu pour le quantificateur existentiel.
+\end{lemma}
+
 \begin{prop}
 	$\Delta_0$ est un ensemble calculable.
 \end{prop}
