@@ -50,7 +50,6 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{figure}
 
 
-
 \begin{definition}[eval]
 	On note $eval(\encode M, w, n)$ la machine que simule l'exécution de $M$ sur $w$ en au plus $n$ étapes.
 \end{definition}
@@ -142,15 +141,21 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \subsection{Hiérarchie arithmétique}
 
 \begin{lemma}
-	Si $A$ est $C$-complet:  $\exists Y$ tel que $X$ est $re(Y)$ avec $Y \in C$ $\iff$ $X$ est $re(A)$.
+	Si $A$ est $C$-complet alors :
+	$$\exists Y \text{ tel que } X \text{ est } re(Y) \text{ avec } Y \in C \iff X \text{ est } re(A)$$
 \end{lemma}
 
-\begin{theorem} [de post]
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{theorem}[de Post]
 	Nous avons les résultats suivants :
 	\begin{enumerate}
 		\item
 		      \begin{enumerate}
-			      \item
+			      \item \label {thm:post-1a}
 			            \begin{eqnarray*}
 				            L \in \Sigma_{n+1} &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n  \\
 				            &\iff& L \text{ est r.e. relativement  un langage }  \Sigma_{n}
@@ -167,6 +172,21 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	\end{enumerate}
 \end{theorem}
 
+
+\begin{definition}[eval avec oracle]
+	$eval(\encode M, \sigma,w,t)$ évalue $M^{\sigma}(w)$ en un nombre d'étapes inférieur à $t$.
+\end{definition}
+
+\begin{proof}[Démonstration du point \ref {thm:post-1a} \bimpRL]
+
+	$L$ est calculable relativement à $A \in \Pi_n$ via la machine $M_L$.
+
+	\begin{eqnarray*}
+		w \in L &\iff& \exists t, M^A \text{ accepte } w \text{ en un temps inférieur à } t\\
+		&\iff& \exists t, \exists \sigma, \sigma \subseteq A \et M^{\sigma} (w) \text{ accepte en temps inférieur à }t
+	\end{eqnarray*}
+
+\end{proof}
 
 \begin{definition}[Saut de Turing]
 	Soit $X$ un langage,
