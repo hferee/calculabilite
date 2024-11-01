@@ -145,21 +145,11 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{remarque}
 
 \begin{remarque}
-	Pour tout langage $L$ on a que $L \leqt \bar L \et \bar L \leqt L$ et dont $L \equivt \bar L$.
+	Pour tout langage $L$ on a que $L \leqt \bar L \et \bar L \leqt L$ et donc $L \equivt \bar L$.
 \end{remarque}
 
 
 \subsection{Hiérarchie arithmétique}
-
-\begin{lemma}
-	Si $A$ est $C$-complet alors :
-	$$\exists Y \text{ tel que } X \text{ est } re(Y) \text{ avec } Y \in C \iff X \text{ est } re(A)$$
-\end{lemma}
-
-
-\begin{proof}
-	TODO
-\end{proof}
 
 \begin{theorem}[de Post]
 	Nous avons les résultats suivants :
@@ -179,7 +169,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 			            \end{eqnarray*}
 		      \end{enumerate}
 
-		\item Il existe un langage $\Sigma_n$ complet, noté $\emptyset^{(n)}$.
+		\item Il existe un langage $\Sigma_n$ complet, noté $\emptyset^{(n)}$. \label{thm:post-2}
 	\end{enumerate}
 \end{theorem}
 
@@ -215,10 +205,15 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement à $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
 \end{definition}
 
+\begin{definition}
+	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrete sur } \encode M}$$
+	$$\emptyset^{(n+1)} = \setdef {\encode M} {M^{\emptyset^{(n)}} \text{ s'arrete sur } \encode M} $$
+\end{definition}
 
-\begin{exemple}
-	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrete sur } \encode M} \equivm \halt$$
-\end{exemple}
+
+\begin{remarque}
+	$$\emptyset' \equivm \halt$$
+\end{remarque}
 
 \begin{exercice}
 	Montrer que $\emptyset '$ est $\Sigma_1$-complet :
@@ -228,4 +223,49 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	\end{enumerate}
 \end{exercice}
 
-TODO
+\begin{proof}
+	\begin{enumerate}
+		\item $\encode M \in \emptyset' \iff \exists t, eval (\encode M, ((_,0), \ldots, (_,0)), \encode M, t) \neq \bot$
+		\item On a que $\emptyset' \equivm \halt$ qui est $\Sigma_1$-complet, donc $\emptyset'$ l'est aussi.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{lemma} \label{lem:trans-turing}
+	Si $A$ est $C$-complet et $Y \in C$, alors :
+	$$X \text{ est } re(Y) \iff X \text{ est } re(A)$$
+\end{lemma}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+
+\begin{proof}[Démonstration du point \ref{thm:post-2}]
+	Il faut donc monter que $\forall n, \emptyset^{(n)}$ est $\Sigma_n$-complet.
+	La demonstration est faite par induction. Les cas $n =0$ et $n=1$ on été traités precedent, il suffit alors de montrer le cas d'induction.
+
+	Supposons $\emptyset^{(n)} \ \Sigma_n$-complet.
+
+	\begin{eqnarray*}
+		L \in \Sigma_{n+1} &\iff& \exists A \in \Sigma_n, L \text { est r.e. relativement à } A \\
+		&\iff& L \text{ est re}(\emptyset^{(n)})\\
+		&\iff& \exists M_L, M_L^{\emptyset^{(n)}} \text { reconnait } L \\
+		&\iff^? & L \leqm \emptyset^{(n + 1)}
+	\end{eqnarray*}
+
+	\begin{itemize}
+		\item \bimpLR
+		      \begin{eqnarray*}
+			      L \in  L  &\iff&  M_L^{\emptyset^{(n)}}(w) \text{ s'arrête et accepte} \\
+			      &\iff&  M_{L,w}^{\emptyset^{(n)}}(\cdot) \text{ s'arrête } \\
+			      &\iff&  \encode{M_L,w} \in \emptyset^{(n+1)} \\
+			      &\iff&  L \leqm  \emptyset^{(n+1)}
+		      \end{eqnarray*}
+		\item \bimpRL \\
+		      Comme $\emptyset^{(n+1)}$ est $re(\emptyset^{(n)})$ et $L \leqm \emptyset^{(n+1)}$ en applicant le lemme \ref{lem:trans-turing}
+		      on obtient que $L$ est $re(\emptyset^{(n))}$ et donc que $\exists M_L, M_L^{\emptyset^{(n)}} \text { reconnait } L$.
+	\end{itemize}
+\end{proof}
+
+
