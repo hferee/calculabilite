@@ -15,7 +15,6 @@ sous forme prenexe et comment les classifier.
 
 
 \begin{definition}
-
 	On défini les ensembles :
 
 	\begin{eqnarray*}
@@ -29,14 +28,15 @@ sous forme prenexe et comment les classifier.
 \end{definition}
 
 \begin{remarque}
-	Dans la définition precedente, les formules de la forme $\forall x \forall y \ldots$ ne sont pas prises en compte. Ceci est du au fait que, grace 
-    au lemme suivant, les quantificateurs égaux qui se suivent peuvent être regroupés en un seul.
+	Dans la définition precedente, les formules de la forme $\forall x \forall y \ldots$ ne sont pas prises en compte. Ceci est du au fait que, grace
+	au lemme suivant, les quantificateurs égaux qui se suivent peuvent être regroupés en un seul.
 \end{remarque}
 
 \begin{lemma}(Admis)
 	Pour tout $\phi$ il existe $\phi_1$ et $\phi_2$ tels que :
-	$$ \forall x_1, \forall x_2 \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
+	$$ \forall x_1, \forall x_2, \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
 	Le meme résultat peut être obtenu pour le quantificateur existentiel.
+	Cette propriété découle du fait que $\N \cong \N \times \N$.
 \end{lemma}
 
 \begin{prop}
@@ -164,9 +164,9 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \begin{theorem}[de Post]
 	Nous avons les résultats suivants :
 	\begin{enumerate}
-		\item
+		\item \label{thm:post-1}
 		      \begin{enumerate}
-			      \item \label {thm:post-1a}
+			      \item \label{thm:post-1a}
 			            \begin{eqnarray*}
 				            L \in \Sigma_{n+1} &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n  \\
 				            &\iff& L \text{ est r.e. relativement  un langage }  \Sigma_{n}
@@ -175,7 +175,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 			      \item
 			            \begin{eqnarray*}
 				            L \in \Pi_{n+1} &\iff& L \text{ est co-r.e. relativement  un langage }  \Sigma_n  \\
-				            &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n
+				            &\iff& L \text{ est co-r.e. relativement  un langage }  \Pi_n
 			            \end{eqnarray*}
 		      \end{enumerate}
 
@@ -188,15 +188,21 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	$eval(\encode M, \sigma,w,t)$ évalue $M^{\sigma}(w)$ en un nombre d'étapes inférieur à $t$.
 \end{definition}
 
-\begin{proof}[Démonstration du point \ref {thm:post-1a} \bimpRL]
+\begin{proof}[Démonstration du point \ref{thm:post-1a} \bimpRL]
 
 	$L$ est calculable relativement à $A \in \Pi_n$ via la machine $M_L$.
 
 	\begin{eqnarray*}
 		w \in L &\iff& \exists t, M^A \text{ accepte } w \text{ en un temps inférieur à } t\\
-		&\iff& \exists t, \exists \sigma, \sigma \subseteq A \et M^{\sigma} (w) \text{ accepte en temps inférieur à }t
+		&\iff& \exists t, \exists \sigma,
+		\underbrace{\sigma \subseteq A}_{\forall u,v, (u,v) \in \sigma \ra (v=1 \iff \phi_A(u))}
+		\land\  M^{\sigma} (w) \text{ accepte en temps inférieur à }t
 	\end{eqnarray*}
 
+	Ainsi, si $A \in \Pi_n$ alors $L \in \Sigma_{n+1}$. Sinon il suffit d'écrire
+	$v = 0 \iff \underbrace{\lnot \phi_A(u)}_{\in \Pi_n}$ et on a aussi que $L \in \Sigma_{n+1}$.
+
+	Les autres cas du point \ref{thm:post-1} se démontrent de manière similaire.
 \end{proof}
 
 \begin{definition}[Saut de Turing]
