@@ -257,7 +257,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	\begin{itemize}
 		\item \bimpLR
 		      \begin{eqnarray*}
-			      L \in  L  &\iff&  M_L^{\emptyset^{(n)}}(w) \text{ s'arrête et accepte} \\
+			      w \in  L  &\iff&  M_L^{\emptyset^{(n)}}(w) \text{ s'arrête et accepte} \\
 			      &\iff&  M_{L,w}^{\emptyset^{(n)}}(\cdot) \text{ s'arrête } \\
 			      &\iff&  \encode{M_L,w} \in \emptyset^{(n+1)} \\
 			      &\iff&  L \leqm  \emptyset^{(n+1)}
@@ -268,4 +268,49 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	\end{itemize}
 \end{proof}
 
+
+
+On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exists \phi \in \Sigma_{n+1}, \text{ \tq }, \phi \notin \Sigma_n \et \phi \notin \Pi_n$.
+
+
+\begin{prop}
+	$$\forall n, \emptyset^{(n)} \notin \Delta_n$$
+\end{prop}
+
+
+\begin{remarque}
+	Pour $n > 0$
+	\begin{eqnarray*}
+		L \in \Delta_n &\iff& L \in \Sigma_n \land L \in \Pi_n \\
+		&\iff& L \text{ est } re(\Sigma_{n-1}) \land L \text{ est } co-re(\Sigma_{n-1})\\
+		&\iff& L \text{ est } re \text{ relativement à } \emptyset^{(n-1)} \land  L \text{ est } co-re \text{ relativement à } \emptyset^{(n-1)} \\
+		&\iff& L \text{ est décidable relativement à } \emptyset^{(n-1)}
+	\end{eqnarray*}
+\end{remarque}
+
+\begin{proof}
+	On traite d'abord le cas $n = 0$ qui est trivial car $\Delta_0 = \emptyset$.
+
+	En suite pour $n > 0$ on peut utiliser la remarque precedente. Ainsi, il suffit de montrer que $\emptyset^{(n)}$ n'est pas décidable relativement à $\emptyset^{(n-1)}$.
+
+	Supposons par l'absurde que $\emptyset^{(n)}$ est décidable relativement à $\emptyset^{(n-1)}$, \ie, il existe $M_n$ telle que $M_n^{\emptyset^{(n-1)}}$ décide $\emptyset^{(n)}$.
+
+	Alors on construit
+
+	$$
+		M_0(\encode M) =
+		\left\{
+		\begin{array}{ll}
+			\text{Si } M_n^A(\encode M) \text{ accepte} & \rightarrow \text{ boucle}  \\
+			\text{Si } M_n^A(\encode M) \text{ rejecte} & \rightarrow \text{ accepte} \\
+		\end{array}
+		\right.
+	$$
+
+	Alors on a que
+	\begin{eqnarray*}
+		M_0^{\emptyset^{(n-1)}}(\encode{M_0}) \text{ boucle} &\iff& M_n^{\emptyset^{(n-1)}} (\encode {M_0}) \text{ accepte} \\
+		&\iff& M_0^{\emptyset^{(n-1)}}(\encode{M_0}) \text{ s'arrête} \contradict
+	\end{eqnarray*}
+\end{proof}
 
