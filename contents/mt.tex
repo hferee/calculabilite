@@ -70,7 +70,7 @@ Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \S
 
 
 \begin{remarque}
-	Les automates s'injectent dans les machines de Turingm il suffit d'ignorer le ruban et de considérer que la tête de lecture est fixe.
+	Les automates s'injectent dans les machines de Turing, il suffit d'ignorer le ruban et de considérer que la tête de lecture est fixe.
 \end{remarque}
 
 \begin{definition}[Machine de Turing non déterministe]
@@ -78,6 +78,13 @@ Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \S
 	permettent d'avoir plusieurs transitions pour un état donné. La différence se trouve donc dans le type de la fonction de transition :
 
 	$$ \Delta: Q \times \Gamma \to \parts{Q \times \Gamma \times \{R, L, N\}}$$
-
 \end{definition}
+
+\begin{prop}
+	Les machines de Turing déterministes et non-déterministes reconnaissent les memes langages.
+\end{prop}
+
+\begin{proof}
+	Vue en TD.
+\end{proof}
 

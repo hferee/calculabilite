@@ -62,12 +62,48 @@ On peut encoder toute machine de Turin par un nombre, qui est appété le nombre
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
 \end{lemma}
 
+\begin{definition}[eval]
+	On note $eval(\encode M, w, n)$ la machine que simule l'exécution de $M$ sur $w$ en au plus $n$ étapes.
+\end{definition}
+
+\begin{prop}[Admis]
+	$eval$ est décidable.
+\end{prop}
+
+\begin{prop}
+	$L$ est décidable $\iff$ $L$ est semi-décidable \emph{et} $L^c$ est semi-décidable
+\end{prop}
+
+\begin{proof}
+	\begin{itemize}
+		\item \bimpLR \ triviale
+		\item \bimpRL \\
+		      On peut exécuter en parallèle des deux machines. Elle s'arrête forcement car on a bien que $\forall w, w \in L \lor w \notin L$.
+	\end{itemize}
+	Ce théorème et sa preuve détaillée correspondent à ceux présentés dans \cite[Theorem~4.22]{sipser}.
+\end{proof}
+
+
+\begin{prop}
+	$L$ décidable $\iff \exists L_d \text{ décidable}, L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$
+\end{prop}
+
+
+\begin{proof}
+	$w \in L \iff \exists t, eval(\encode {M_L}, w, k) = 1$
+
+	Alors on pose $L_d = \setdef {\encode{w, k}} {eval(\encode {M_L}, w,k) = 1}$.
+	$L_d$ est décidable et on a l'équivalence par construction.
+\end{proof}
+
+
+
 \subsection{Quelques problèmes}
 
 Quelques problèmes décidables en rapport aux automates :
 
 \begin{itemize}
-	\item $\text{ACCEPT}_A = \setdef {<A,w>} {A \text {est un automate qui accepte } w}$.
+	\item $\text{ACCEPT}_A = \setdef {<A,w>} {A \text { est un automate qui accepte } w}$.
 	      Dire que c'est problème est décidable revient a dire que $\exists$ un interpréteur d'automates en Machine de Turing.
 	\item $\text{EQUIV}_A = \setdef {<A,A'>} {A \text { et } A' \text{ acceptent le meme langage}}$.
 	\item $\text{EXISTS}_A = $ Il existe un mot reconnu.
