@@ -76,9 +76,25 @@
 \end{prop}
 
 \begin{proof}
-	Soit $L$ un langage sémi-décidable. Montrons que $L \leqm $ HALT. Soit $M_L$ la machine qui sémi-décide $L$.
+	Soit $L \in $ RE, montrons que $L \leqm \halt$. Soit $M_L$ la machine qui semi-décide $L$.
 
-	Soit $M_L'(w)$ la machine qui exécute $M_L$ sur $w$ et qui boucle si le résultat de $M_L$ est 1. 
-	Alors on a que $w \in L \iff M_L'(w) \neq \bot \iff \encode {M_L', w} \in \halt$
-	Ainsi, $L \leqm \halt$.
+	Alors on construit $M'_L$ la machine suivante:
+	\begin{algorithmic}[lines]
+		\Function{$M'_L$}{$\encode w$}
+		\If {$M_L (w)$} {$1$}
+		\Else { $\bot$}
+		\EndIf
+		\EndFunction
+	\end{algorithmic}
+
+	\begin{eqnarray*}
+		w \in L &\iff& M_L = 1 \\
+		&\iff& M'_L \neq \bot \\
+		&\iff& M'_L \text{ s'arrête sur } w\\
+		&\iff& \encode{M'_L,w} \in \halt
+	\end{eqnarray*}
+
+	Et donc, on pose $f (w) = \encode {M'_L,w}$ et on a bien que
+	$w \in L \iff f(w) \in \halt$ et donc HALT est RE-complet.
 \end{proof}
+
