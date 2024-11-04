@@ -98,3 +98,22 @@
 	$w \in L \iff f(w) \in \halt$ et donc HALT est RE-complet.
 \end{proof}
 
+\begin{exercice}
+	Construire, à partir de HALT, un langage qui n'est ni RE ni co-RE.
+\end{exercice}
+
+\begin{proof}
+	Considérons
+	$$ L = \setdef {\encode {M,M',w}} {M(w) = \bot \et M'(w) \neq \bot} $$
+
+	Comme HALT et $\overline {\halt}$ sont RE-complet et co-RE-complet respectivement, il suffit de montrer $\halt \leqm L \et \overline{\halt} \leqm L$.
+
+	\begin{itemize}
+		\item $\encode {M,w} \in \halt \iff \encode {M_{loop}, M, w} \in L$. Donc $\halt \leqm L$.
+		\item $\encode {M,w} \in \overline{\halt} \iff \encode {M, M_1, w} \in L$. Donc $\overline{\halt} \leqm L$ (où $M_1$ est une machine qui s'arrête toujours).
+	\end{itemize}
+
+	On a donc que $L$ n'est ni RE ni co-RE.
+\end{proof}
+
+
