@@ -140,3 +140,24 @@
 
 \end{proof}
 
+
+\begin{exercice}
+	Montrer que l'équivalence de machines de Turing n'est ni RE ni co-RE.
+\end{exercice}
+
+\begin{proof}
+	Il faut montrer que le langage $EQUIV =  \setdef {\encode {M,M'}} {\forall w \in \mots, M(w) = M'(w)}$ vérfie
+	$\halt \leqm EQUIV \et \overline{\halt} \leqm EQUIV$.
+
+	Soit $M$ une machine de Turing et $w$ un mot :
+	\begin{itemize}
+		\item On pose $M' =  \fun \_ {M(w); \text{ return } 1}$. \\
+		      $\encode {M,w} \in \halt \iff \encode {M_1, M', w} \in EQUIV$. Donc $\halt \leqm EQUIV$.
+		\item  On pose $M' =  \fun \_ {M(w)}$. \\
+		      $\encode {M,w} \in \overline{\halt} \iff \encode {M_{loop}, M', w} \in L$. Donc $\overline{\halt} \leqm EQUIV$.
+	\end{itemize}
+
+	On a donc que $EQUIV$ n'est ni RE ni co-RE.
+\end{proof}
+
+
