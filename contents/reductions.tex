@@ -80,7 +80,7 @@
 
 	Alors on construit $M'_L$ la machine suivante:
 	\begin{algorithmic}[lines]
-		\Function{$M'_L$}{$\encode w$}
+		\Function{$M'_L$}{$w$}
 		\If {$M_L (w)$} {$1$}
 		\Else { $\bot$}
 		\EndIf
@@ -116,4 +116,27 @@
 	On a donc que $L$ n'est ni RE ni co-RE.
 \end{proof}
 
+\begin{exercice}
+	Montrer que si un programme reconnait le langage vide alors il est indécidable.
+\end{exercice}
+
+\begin{proof}
+	Il suffit de montrer que $\overline{\halt} \leqm L_{\emptyset} = \setdef{\encode M} {\forall w \in \mots, M(w) \neq 1}$.
+
+	On pose la machine $M'$ suivante :
+	\begin{algorithmic}[lines]
+		\Function{$M'$}{$w$}
+		\State $M(w)$;
+		\State \textbf{return} $1$
+		\EndFunction
+	\end{algorithmic}
+
+	Alors on a que
+	\begin{eqnarray*}
+		\encode{M,w} \in \overline{\halt} &\iff& M(w) = \bot \\
+		&\iff& \forall w', M'(w') \neq 1 \\
+		&\iff& M' \in L_{\emptyset}
+	\end{eqnarray*} et donc $\overline{\halt} \leqm L_{\emptyset}$.
+
+\end{proof}
 
