@@ -74,6 +74,36 @@
 \end{proof}
 
 
+\begin{prop}
+	Tout langage semi-décidable infini contient un langage décidable infini.
+\end{prop}
+
+\begin{proof}
+	Soit $L$ un langage semi-décidable infini et soit $M_L$ la machine qui le semi-décide. Alors
+	on pose $M_{L'}$ la machine suivante qui pour un mot $w \in \mots$ :
+	\begin{enumerate}
+		\item Énumere les paires $(w_i,k_i)$.
+		\item Pour chaque paire évalue $M_L$ sur $w_i$ en moins de $k_i$ étapes et :
+		      Si $M_L$ accepte alors :
+		      \begin{itemize}
+			      \item Si $w = w_i$ alors on accepte le mot
+			      \item Si $\abs w \leq \abs {w_i}$ alors on rejette le mot.
+		      \end{itemize}
+		      Dans tout les autres cas on évalue la paire suivante.
+	\end{enumerate}
+	On a bien que $L'$, le langage reconnu par $M_{L'}$, est un sous ensemble de $L$.
+
+	Le langage est bine décidable car $M_{L'}$ s'arrête toujours : Comme le langage $L$ est infini, il existe
+	$m$ tel que $\abs w < \abs {w_m}$ et $\exists k$ tel que $M_L$ reconnait $w_m$. Ainsi, si le mot $w$ n'est pas reconnu,
+	la machine une fois arrivé a la $m$-ieme paire.
+
+	Il faut montrer maintenant que $L'$ est infini.
+
+	Supposons par l'absurde $L'$ fini. Étant donné que $L$ est infini, on a que $\exists n, \forall w, \abs w \geq n, w \notin L'$.
+	Or on a aussi que $\exists w, \abs w > n$ et $w \in L$, car $L$ infini. Mais alors $\exists (w_i,k_i)$ tel que $w = w_i$ et qui est
+	accepté en mois de $k_i$ étapes par $M_L$, et donc $w \in L'$ $\contradict$.
+\end{proof}
+
 On peut encoder toute machine de Turing par un nombre, qui est appété le nombre de Gödel et noté : $\encode M \in \mots$.
 
 \begin{definition}[Énumération des fonctions calculables] \label{def:enum}
