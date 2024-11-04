@@ -49,7 +49,28 @@
 \end{prop}
 
 \begin{proof}
-	Vue en TD.
+	\begin{itemize}
+		\item \bimpLR \\
+		      Soit $M_L$ qui semi-decide $L$. On pose $M_f$ la machine qui pour un mot $u \in \mots$, avec $n = \abs u$, fait :
+		      \begin{enumerate}
+			      \item Énumere toutes les paires $(w,k) \in \mots \times \N$.
+			      \item Simule l'exécution de $M_L$ sur l'entrée $w$ en au plus $k$ étapes.
+			      \item Retourne le $n$-ième mot accepté.
+		      \end{enumerate}
+
+		      Montrons que cette machine énumere $L$. Soit $w \in \mots$ :
+		      \begin{itemize}
+			      \item \bimpLR \\
+			            Si $w \in L$, alors $M_L$ accepte $w$ un en nombre $k$ d'étapes de calcul. Donc il existe $u \in \mots$ tel que
+			            $(w,k)$ soit la $\abs u$-iéme paire accepté. Et donc $M_f(u) = w$.
+			      \item \bimpRL \\
+			            Si $w$ est énumeré par $M_f$, alors $w \in L$ car $\exists k$ tel que $M_L$ l'accepte en $k$ étapes.
+		      \end{itemize}
+
+		\item \bimpRL \\
+		      Si $\exists M_f$ qui énumere $L$, alors on a que $L = \setdef {f(w)} {w \in \mots}$. Alors on pose $M_L$ la machine qui pour $w$,
+		      énumere les $w' \in \mots$ jusqu'à trouver $M(w') = w$ et qui accepte.
+	\end{itemize}
 \end{proof}
 
 
