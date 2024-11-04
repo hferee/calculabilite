@@ -184,12 +184,12 @@ $\text{ACCEPT}_{A_p}$ et $\text{INFINITE}_{A_p}$ restent décidables mais pas $\
 \begin{proof}
 	Il suffit d'écrire un programme "impératif" :
 
-	Entrée : $\encode {M,w}$
-
-	Code:
-	u(M,w);
-	return 1;
-
+	\begin{algorithmic}[lines]
+		\Function{$M'$}{$\encode{M,w}$}
+		\State $\universal M w$;
+		\State \textbf{return} $1$
+		\EndFunction
+	\end{algorithmic}
 \end{proof}
 
 \begin{prop}
