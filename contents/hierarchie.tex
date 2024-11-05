@@ -104,7 +104,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{prop}
 
 \begin{proof}
-	$$L \text{ est r.e.} \iff \exists L_d \text{ décidable }, L = \setdef {w} {\underbrace{\exists w', \encode {w, w'} \in L_d}_{\phi}}$$
+	$$L \text{ est r.e.} \iff \exists L_d \text{ décidable }, L = \setdef {w} {\overbrace{\exists w', \underbrace{\encode {w, w'} \in L_d}_{\in \Delta_0}}^{\in \Sigma_1}}$$
 	Et donc $RE = \Sigma_1$
 \end{proof}
 
@@ -138,7 +138,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{remarque}
 
 
-\begin{lemma} 
+\begin{lemma}
 	Si $A$ est $C$-complet et $Y \in C$, alors :
 	$$X \text{ est } re(Y) \implies X \text{ est } re(A)$$
 \end{lemma}
