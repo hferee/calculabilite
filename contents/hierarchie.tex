@@ -140,6 +140,16 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{remarque}
 
 
+\begin{lemma} \label{lem:trans-turing}
+	Si $A$ est $C$-complet et $Y \in C$, alors :
+	$$X \text{ est } re(Y) \iff X \text{ est } re(A)$$
+\end{lemma}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+
 \subsection{Hiérarchie arithmétique}
 
 \begin{theorem}[de Post]
@@ -199,6 +209,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 
 \end{definition}
 
+
 \begin{definition}
 	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrete sur } \encode M}$$
 	$$\emptyset^{(n+1)} = \setdef {\encode M} {M^{\emptyset^{(n)}} \text{ s'arrete sur } \encode M} $$
@@ -244,19 +255,11 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{proof}
 
 
-\begin{lemma} \label{lem:trans-turing}
-	Si $A$ est $C$-complet et $Y \in C$, alors :
-	$$X \text{ est } re(Y) \iff X \text{ est } re(A)$$
-\end{lemma}
-
-\begin{proof}
-	TODO
-\end{proof}
 
 
 \begin{proof}[Démonstration du point \ref{thm:post-2}]
 	Il faut donc monter que $\forall n, \emptyset^{(n)}$ est $\Sigma_n$-complet.
-	La demonstration est faite par induction. Les cas $n =0$ et $n=1$ on été traités precedent, il suffit alors de montrer le cas d'induction.
+	La demonstration est faite par induction. Les cas $n =0$ et $n=1$ on été traités précédemment, il suffit alors de montrer le cas d'induction.
 
 	Supposons $\emptyset^{(n)} \ \Sigma_n$-complet.
 
@@ -272,12 +275,12 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 		      \begin{eqnarray*}
 			      w \in  L  &\iff&  M_L^{\emptyset^{(n)}}(w) \text{ s'arrête et accepte} \\
 			      &\iff&  M_{L,w}^{\emptyset^{(n)}}(\cdot) \text{ s'arrête } \\
-			      &\iff&  \encode{M_L,w} \in \emptyset^{(n+1)} \\
+			      &\iff&  \encode{M_{L,w}} \in \emptyset^{(n+1)} \\
 			      &\iff&  L \leqm  \emptyset^{(n+1)}
 		      \end{eqnarray*}
 		\item \bimpRL \\
-		      Comme $\emptyset^{(n+1)}$ est $re(\emptyset^{(n)})$ et $L \leqm \emptyset^{(n+1)}$ en applicant le lemme \ref{lem:trans-turing}
-		      on obtient que $L$ est $re(\emptyset^{(n)})$ et donc que $\exists M_L, M_L^{\emptyset^{(n)}} \text { reconnait } L$.
+		      On a que $L \leqm \emptyset^{(n+1)}$. Soit $f$ la fonction de reduction, alors on pose
+		      $M_L = M_{\emptyset^{n+1} \circ f}$. Cette machine vérifie bien que $M_L^{\emptyset^{(n)}}$ reconnait  $L$
 	\end{itemize}
 \end{proof}
 
