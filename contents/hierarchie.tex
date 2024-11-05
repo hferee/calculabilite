@@ -219,7 +219,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 
 \begin{proof}
 	\begin{enumerate}
-		\item $\encode M \in \emptyset' \iff \exists t, eval (\encode M, ((_,0), \ldots, (_,0)), \encode M, t) \neq \bot$
+		\item $\encode M \in \emptyset' \iff \exists t, eval (\encode M, ((\_,0), \ldots, (\_,0)), \encode M, t) \neq \bot$
 		\item On a que $\emptyset' \equivm \halt$ qui est $\Sigma_1$-complet, donc $\emptyset'$ l'est aussi.
 	\end{enumerate}
 \end{proof}
@@ -258,7 +258,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 		      \end{eqnarray*}
 		\item \bimpRL \\
 		      Comme $\emptyset^{(n+1)}$ est $re(\emptyset^{(n)})$ et $L \leqm \emptyset^{(n+1)}$ en applicant le lemme \ref{lem:trans-turing}
-		      on obtient que $L$ est $re(\emptyset^{(n))}$ et donc que $\exists M_L, M_L^{\emptyset^{(n)}} \text { reconnait } L$.
+		      on obtient que $L$ est $re(\emptyset^{(n)})$ et donc que $\exists M_L, M_L^{\emptyset^{(n)}} \text { reconnait } L$.
 	\end{itemize}
 \end{proof}
 
@@ -304,7 +304,7 @@ On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exist
 	Alors on a que
 	\begin{eqnarray*}
 		M_0^{\emptyset^{(n-1)}}(\encode{M_0}) \text{ boucle} &\iff& M_n^{\emptyset^{(n-1)}} (\encode {M_0}) \text{ accepte} \\
-		&\iff& M_0^{\emptyset^{(n-1)}}(\encode{M_0}) \text{ s'arrête} \contradict
+		&\iff& M_0^{\emptyset^{(n-1)}}(\encode{M_0}) \text{ s'arrête} \ \contradict
 	\end{eqnarray*}
 \end{proof}
 
