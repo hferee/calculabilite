@@ -61,10 +61,15 @@
 	Montrons que $\overline {\halt} \leqm L$.
 	Soit $M$ une machine de Turing, pour tout $w$ on pose
 	$$M' = \fun u {M(w); M_2(u)}$$
+
+	On commence par remarque que, comme $M_{loop} \in L$ et $M_2 \notin L$ alors $\lang (M_2) \neq \emptyset$. Ainsi,
+	$\exists w', M_2(w') \neq \bot$.
 	Alors
 	\begin{eqnarray*}
-        M(w) = \bot &\iff& \lang {M'} = \emptyset \\
-		&\iff& M_L (M') = 1
+		\encode {M,w} \in \overline{\halt}  &\iff& M(w) = \bot \\
+		&\iff& \lang {M'} = \emptyset \\
+		&\iff& M_L (M') = 1 \\
+		&\iff& \encode {M'} \in L
 	\end{eqnarray*}
 	Donc $\overline {\halt} \leqm L$ et ainsi $L$ n'est pas décidable.
 \end{proof}
