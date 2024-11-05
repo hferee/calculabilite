@@ -1,4 +1,3 @@
 (executable
  (public_name quines)
- (name main)
- (libraries quines))
+ (name main))
