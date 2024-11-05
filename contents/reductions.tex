@@ -14,7 +14,9 @@
 
 \begin{proof}
 
-	Soit $M_B$ la machine qui reconnait $B$ et $M_f$ celle qui calcule $f$. Alors
+	Soit $M_B$ la machine qui décide $B$ et $M_f$ celle qui calcule $f$. On pose $M_A (w) = M_B(M_f(w))$.
+
+	Montrons que $M_A$ décide $A$. On a les équivalences suivantes:
 	\begin{eqnarray*}
 		\forall w \in \mots, w \in A &\iff& f(w) \in B \\
 		&\iff& M_B (M_f (w)) = 1 \\
@@ -29,6 +31,7 @@
 		&\iff& M_A \text{ rejette } w
 	\end{eqnarray*}
 
+	Et donc $M_A$ décide $A$.
 
 \end{proof}
 
@@ -56,8 +59,8 @@
 \begin{proof}
 	Si $A \leqm B$ alors $\overline A \leqm \overline B$ car
 	\begin{eqnarray*}
-		w \notin A &\iff& f(w) \notin A \\
-		&\iff& A \leqm B
+		(w \notin A &\iff& f(w) \notin B) \\
+		&\iff& A \leqm B \reason{par contraposée}
 	\end{eqnarray*}
 \end{proof}
 
@@ -81,7 +84,7 @@
 	Alors on construit $M'_L$ la machine suivante:
 	\begin{algorithmic}[lines]
 		\Function{$M'_L$}{$w$}
-		\If {$M_L (w)$} {$1$}
+		\If {$M_L (w) = 1$} {$1$}
 		\Else { $\bot$}
 		\EndIf
 		\EndFunction
@@ -109,7 +112,7 @@
 	Comme HALT et $\overline {\halt}$ sont RE-complet et co-RE-complet respectivement, il suffit de montrer $\halt \leqm L \et \overline{\halt} \leqm L$.
 
 	\begin{itemize}
-		\item $\encode {M,w} \in \halt \iff \encode {M_{loop}, M, w} \in L$. Donc $\halt \leqm L$.
+        \item $\encode {M,w} \in \halt \iff \encode {M_{loop}, M, w} \in L$. Donc $\halt \leqm L$ (où $M_{loop}$ est une machine qui boucle toujours).
 		\item $\encode {M,w} \in \overline{\halt} \iff \encode {M, M_1, w} \in L$. Donc $\overline{\halt} \leqm L$ (où $M_1$ est une machine qui s'arrête toujours).
 	\end{itemize}
 

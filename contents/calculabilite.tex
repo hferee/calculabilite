@@ -2,14 +2,14 @@
 
 
 \begin{definition}[Langage semi-décidable]
-	Un langage $L \subseteq \mots$ est \textbf{semi-décidable} s'il existe une machine de Turing $M$ \tlq
-	$$ \forall w \in \mots, w \in L \iff M(w) = 1 $$
+	Un langage $L \subseteq \mots$ est \textbf{semi-décidable} s'il existe une machine de Turing, $M_L$, \tlq
+	$$ \forall w \in \mots, w \in L \iff M_L(w) = 1 $$
 \end{definition}
 
 \begin{definition}[Langage décidable]
-	Un langage $L \subseteq \mots$ est \textbf{décidable} s'il existe une machine de Turing $M$ \tlq
-	$$ \forall w \in \mots, w \in L \implies M(w) = 1 \quad \text{et} \quad w \notin L \implies M(w) = 0 $$
-	et $M$ s'arrête pour tout $w$.
+	Un langage $L \subseteq \mots$ est \textbf{décidable} s'il existe une machine de Turing, $M_L$, \tlq
+	$$ \forall w \in \mots, w \in L \implies M_L(w) = 1 \quad \text{et} \quad w \notin L \implies M_L(w) = 0 $$
+	et donc $M_L$ s'arrête pour tout $w$.
 \end{definition}
 
 \begin{prop}
@@ -69,7 +69,7 @@
 
 		\item \bimpRL \\
 		      Si $\exists M_f$ qui énumere $L$, alors on a que $L = \setdef {f(w)} {w \in \mots}$. Alors on pose $M_L$ la machine qui pour $w$,
-		      énumere les $w' \in \mots$ jusqu'à trouver $M(w') = w$ et qui accepte.
+		      énumere les $w' \in \mots$ jusqu'à trouver $M_f(w') = w$ et qui accepte.
 	\end{itemize}
 \end{proof}
 
@@ -84,6 +84,7 @@
 	\begin{enumerate}
 		\item Énumere les paires $(w_i,k_i)$.
 		\item Pour chaque paire évalue $M_L$ sur $w_i$ en moins de $k_i$ étapes et :
+
 		      Si $M_L$ accepte alors :
 		      \begin{itemize}
 			      \item Si $w = w_i$ alors on accepte le mot
@@ -93,13 +94,13 @@
 	\end{enumerate}
 	On a bien que $L'$, le langage reconnu par $M_{L'}$, est un sous ensemble de $L$.
 
-	Le langage est bine décidable car $M_{L'}$ s'arrête toujours : Comme le langage $L$ est infini, il existe
+	Le langage est bien décidable car $M_{L'}$ s'arrête toujours : Comme le langage $L$ est infini, il existe
 	$m$ tel que $\abs w < \abs {w_m}$ et $\exists k$ tel que $M_L$ reconnait $w_m$. Ainsi, si le mot $w$ n'est pas reconnu,
 	la machine, une fois arrivé à la $m$-ieme paire, rejette $w$ et donc s'arrête.
 
 	Il faut montrer maintenant que $L'$ est infini.
 
-	Supposons par l'absurde $L'$ fini. Étant donné que $L$ est infini, on a que $\exists n, \forall w, \abs w \geq n, w \notin L'$.
+	Supposons par l'absurde $L'$ fini. On a donc que $\exists n, \forall w, \abs w \geq n, w \notin L'$.
 	Or on a aussi que $\exists w, \abs w > n$ et $w \in L$, car $L$ infini. Mais alors $\exists (w_i,k_i)$ tel que $w = w_i$ et qui est
 	accepté en mois de $k_i$ étapes par $M_L$, et donc $w \in L'$ $\contradict$.
 \end{proof}
@@ -118,7 +119,7 @@
 
 
 \begin{lemma}[Machines universelles]\label{lem:univ}
-	Il existe une machine universelle $U$, \ie, $$\forall M,w, \  U (\encode {M,w}) = M (w)$$
+	Il existe une machine universelle $\mathcal U$, \ie, $$\forall M,w, \  \universal M w = M (w)$$
 	ou de manière equivalente
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
 \end{lemma}
@@ -139,7 +140,7 @@
 	\begin{itemize}
 		\item \bimpLR \ triviale
 		\item \bimpRL \\
-		      On peut exécuter en parallèle des deux machines. Elle s'arrête forcement car on a bien que $\forall w, w \in L \lor w \notin L$.
+		      On peut exécuter en parallèle les deux machines. Elle s'arrête forcement car on a bien que $\forall w, w \in L \lor w \notin L$.
 	\end{itemize}
 	Ce théorème et sa preuve détaillée correspondent à ceux présentés dans \cite[Theorem~4.22]{sipser}.
 \end{proof}
@@ -197,8 +198,12 @@ $\text{ACCEPT}_{A_p}$ et $\text{INFINITE}_{A_p}$ restent décidables mais pas $\
 \end{prop}
 
 \begin{proof}
-	Supposons par l'absurde que HALT est décidable. Alors il existe un entier $n$ \tq $\phi_n$ décide HALT, c'est-à-dire
-	$ \phi_n(\encode {M, w} ) = 1 \iff \phi_n(w) \neq \bot $ et vaut $0$ sinon.
+	Supposons par l'absurde que HALT est décidable. Alors il existe un entier $n$ \tq $\phi_n$ décide HALT, \cad
+	$$ \phi_n(\encode {M, w} ) = \left\{ \begin{array}{ll}
+			1 & \text{ si } \phi_{\encode M}(w) \neq \bot \\
+			0 & \text{ sinon}
+		\end{array}
+		\right.$$
 
 	Soit $n'$ le code de la fonction qui sur $w$ vaut 1 si $\phi_n (w,w) = 0 $ et n'est pas définie sinon. Alors
 	\begin{eqnarray*}
