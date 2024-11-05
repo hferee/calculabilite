@@ -147,15 +147,18 @@
 
 
 \begin{prop}
-	$L$ décidable $\iff \exists L_d \text{ décidable}, L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$
+	$L$ semi-décidable $\iff \exists L_d \text{ décidable}, L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$
 \end{prop}
 
 
 \begin{proof}
-	$w \in L \iff \exists t, eval(\encode {M_L}, w, k) = 1$
+	On commence par remarque que : $w \in L \iff \exists t, eval(\encode {M_L}, w, t) = 1$. On pose
+	$L_d = \setdef {\encode{w, k}} {eval(\encode {M_L}, w,k) = 1}$.
 
-	Alors on pose $L_d = \setdef {\encode{w, k}} {eval(\encode {M_L}, w,k) = 1}$.
-	$L_d$ est décidable et on a l'équivalence par construction.
+	On a bien que $L_d$ est décidable et le sens \bimpLR découle par construction.
+
+	L'autre sense, \ie, montrer que $L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$ est semi-décidable,
+	peut se faire par énumération sur les $w'$, mais elle est laissée en exercice au lecteur.
 \end{proof}
 
 
