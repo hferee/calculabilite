@@ -1,39 +1,39 @@
 \section{Hiérarchie arithmétique}
 
 
-Dans cette sections nous allons étudier les $\underbrace{\text{formules}}_{\land, \lor, \lnot}$
+Dans cette section, nous allons étudier les $\underbrace{\text{formules}}_{\land, \lor, \lnot}$
 $\underbrace{\text{arithmétiques}}_{\N, +, *, \leq, \text{S}}$ du $\underbrace{\text{premier ordre}}_{\exists x, \forall x}$
-sous forme prenexe et comment les classifier.
+sous forme prénexe et comment les classifier.
 
 
-\begin{definition}[Forme prenexe]
-	Une formule est sous forme prenexe si tous ses quantificateurs non bornés sont "à gauche".
+\begin{definition}[Forme prénexe]
+	Une formule est sous forme prénexe si tous ses quantificateurs non-bornés sont "à gauche".
 
-	$(\forall x (x \leq 2)) \land  (\forall y (2 \leq y))$ n'est pas sous forme prenexe mais $(\forall x \forall y ((x \leq 2) \land  (2 \leq y))$ l'est.
+	$(\forall x (x \leq 2)) \land  (\forall y (2 \leq y))$ n'est pas sous forme prénexe mais $(\forall x \forall y ((x \leq 2) \land  (2 \leq y))$ l'est.
 \end{definition}
 
 \begin{definition}
-	On défini les ensembles :
+	On définit les ensembles :
 
 	\begin{eqnarray*}
 		\Sigma_{n + 1} &=& \setdef { \exists x \psi } {\psi \in \Pi_n}  \\
 		\Pi_{n + 1} &=& \setdef { \forall x \psi } {\psi \in \Sigma_n}  \\
 		\Delta_{n + 1} &=& \Sigma_{n + 1} \cap \Pi_{n + 1} \\
-		\Delta_0 &=& \Pi_0 = \Sigma_0 \reason {formules sans quantificateurs non bornés}
+		\Delta_0 &=& \Pi_0 = \Sigma_0 \reason {formules sans quantificateurs non-bornés}
 	\end{eqnarray*}
 
-	Autrement dit, $\Sigma_n$ est l'ensemble de formules avec $n$ quantificateurs alternés qui commence par un quantificateur existentiel.
+	Autrement dit, $\Sigma_n$ est l'ensemble des formules avec $n$ quantificateurs alternés, qui commencent par un quantificateur existentiel.
 \end{definition}
 
 \begin{remarque}
-	Dans la définition precedente, les formules de la forme $\forall x \forall y \ldots$ ne sont pas prises en compte. Ceci est du au fait que, grace
+	Dans la définition précédente, les formules de la forme $\forall x \forall y \ldots$ ne sont pas prises en compte. Ceci est dû au fait que, grâce
 	au lemme suivant, les quantificateurs égaux qui se suivent peuvent être regroupés en un seul.
 \end{remarque}
 
 \begin{lemma}(Admis)
 	Pour tout $\phi$ il existe $\phi_1$ et $\phi_2$ tels que :
 	$$ \forall x_1, \forall x_2, \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
-	Le meme résultat peut être obtenu pour le quantificateur existentiel.
+	Le même résultat peut être obtenu pour le quantificateur existentiel.
 	Cette propriété découle du fait que $\N \cong \N \times \N$.
 \end{lemma}
 
@@ -42,12 +42,12 @@ sous forme prenexe et comment les classifier.
 \end{prop}
 
 \begin{proof}
-	Soit $\phi \in \Delta_0$, alors, comme elle ne contient pas de quantificateurs non bornés, on peut essayer toutes les valeurs possibles, car il y a un nombre
+	Soit $\phi \in \Delta_0$, alors, comme elle ne contient pas de quantificateurs non-bornés, on peut essayer toutes les valeurs possibles, car il y en a un nombre
 	fini.
 \end{proof}
 
 
-Dans cette section nous allons étudier les relations entres ce ensembles afin de pouvoir les classifier, aboutissant a la hiérarchie de la Figure \ref{fig:arith-hier}.
+Dans cette section, nous allons étudier les relations entres ces ensembles afin de pouvoir les classifier, aboutissant à la hiérarchie de la Figure \ref{fig:arith-hier}.
 
 
 \begin{figure}[h]
@@ -80,7 +80,7 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	Soit $L \in \Sigma_1$. Alors il existe $\phi \in \Delta_0$ \tq
 	$$ L = \setdef {n} {\exists x \phi(x,n)} $$
 
-	Soit $M(n)$ la machine qui énumere tous les $x$ et accepte si $\phi(x,n)$ est satisfaite.
+	Soit $M(n)$ la machine qui énumère tous les $x$ et accepte si $\phi(x,n)$ est satisfaite.
 	Alors $M$ reconnait $L$.
 \end{proof}
 
@@ -111,15 +111,15 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \subsection{Machines à oracle}
 
 \begin{definition}[Machine de Turing à oracle]
-	Une machine à oracle est une machine de Turing qui a access a une fonction $\fmots {\mathscr O}$ pendant son execution: elle a donc, en plus de la machine
-	initiale, un ruban d'appel (pour l'oracle) et un état special d'appel.
+	Une machine à oracle est une machine de Turing qui a acces à une fonction $\fmots {\mathscr O}$ pendant son exécution. Elle a donc, en plus de la machine
+	initiale, un ruban d'appel (pour l'oracle) et un état spécial d'appel.
 
-	Si la machine de rentre dans l'état d'appel avec $u \in \mots$ sur le ruban, alors $\mathscr O (u) \in \mots$ est écrit sur le ruban d'appel.
+	Si la machine rentre dans l'état d'appel avec $u \in \mots$ sur le ruban, alors $\mathscr O (u) \in \mots$ est écrit sur le ruban d'appel.
 \end{definition}
 
 \begin{definition}[Reconnaissance]
 
-	On dit que $M$ reconnait $L$ relativement a un oracle $A$ si
+	On dit que $M$ reconnait $L$ relativement à un oracle $A$ si
 	$$ \forall w, M^A (w) = 1 \iff w \in L $$
 	où $M^A$ est l'exécution de $M$ avec l'oracle $A$.
 
@@ -130,11 +130,11 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 \end{definition}
 
 \begin{remarque}
-	On a que $A \leqm B \implies A \leqt B$ (il suffit de prendre la fonction de reduction $f$ comme l'oracle).
+	On a que $A \leqm B \implies A \leqt B$ (il suffit de prendre la fonction de reduction $f$ comme oracle).
 \end{remarque}
 
 \begin{remarque}
-	Pour tout langage $L$ on a que $L \leqt \bar L \et \bar L \leqt L$ et donc $L \equivt \bar L$.
+	Pour tout langage $L$, on a que $L \leqt \bar L \et \bar L \leqt L$ et donc $L \equivt \bar L$.
 \end{remarque}
 
 
