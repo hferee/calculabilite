@@ -209,6 +209,25 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	$$\emptyset' \equivm \halt$$
 \end{remarque}
 
+
+\begin{proof}
+	\begin{itemize}
+		\item \begin{eqnarray*}
+			      \encode M \in \emptyset' &\iff& M^{\emptyset} (\encode M) \neq \bot \\
+			      &\iff& \encode {M, \encode M} \in \halt
+		      \end{eqnarray*}
+		      Et donc $\emptyset' \leqm \halt$.
+
+		\item
+		      \begin{eqnarray*}
+			      \encode {M,w} \in \halt &\iff& M(w) \neq \bot \\
+			      &\iff& \encode{\fun {\_} M(w)} \in \emptyset'
+		      \end{eqnarray*}
+		      Et donc $\halt \leqm \emptyset'$.
+	\end{itemize}
+\end{proof}
+
+
 \begin{exercice}
 	Montrer que $\emptyset '$ est $\Sigma_1$-complet :
 	\begin{enumerate}
