@@ -186,14 +186,17 @@ Dans cette section nous allons étudier les relations entres ce ensembles afin d
 	Les autres cas du point \ref{thm:post-1} se démontrent de manière similaire.
 \end{proof}
 
+\begin{notation}
+	$\phi_{c \in \mots}$ : énumeration des fonctions calculables.
+
+	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement à $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
+\end{notation}
+
 \begin{definition}[Saut de Turing]
 	Soit $X$ un langage,
 
 	$X' = \setdef c {\phi_c^X(c) \text{ est défini}} = \setdef {\encode M} {M^X \text{ s'arrete sur } \encode M}$
 
-	$\phi_{c \in \mots}$ : énumeration des fonctions calculables.
-
-	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement à $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
 \end{definition}
 
 \begin{definition}
