@@ -290,7 +290,7 @@ On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exist
 
 
 \begin{prop}
-	$$\forall n, \emptyset^{(n)} \notin \Delta_n$$
+	$$\forall n \in \N^*, \emptyset^{(n)} \notin \Delta_n$$
 \end{prop}
 
 
@@ -305,8 +305,6 @@ On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exist
 \end{remarque}
 
 \begin{proof}
-	On traite d'abord le cas $n = 0$ qui est trivial car $\Delta_0 = \emptyset$.
-
 	En suite pour $n > 0$ on peut utiliser la remarque precedente. Ainsi, il suffit de montrer que $\emptyset^{(n)}$ n'est pas décidable relativement à $\emptyset^{(n-1)}$.
 
 	Supposons par l'absurde que $\emptyset^{(n)}$ est décidable relativement à $\emptyset^{(n-1)}$, \ie, il existe $M_n$ telle que $M_n^{\emptyset^{(n-1)}}$ décide $\emptyset^{(n)}$.
