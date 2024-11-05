@@ -168,7 +168,7 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 			            \end{eqnarray*}
 		      \end{enumerate}
 
-		\item Il existe un langage $\Sigma_n$ complet, noté $\emptyset^{(n)}$. \label{thm:post-2}
+		\item Il existe un langage $\Sigma_n$-complet, noté $\emptyset^{(n)}$. \label{thm:post-2}
 	\end{enumerate}
 \end{theorem}
 
@@ -203,14 +203,14 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \begin{definition}[Saut de Turing]
 	Soit $X$ un langage,
 
-	$X' = \setdef c {\phi_c^X(c) \text{ est défini}} = \setdef {\encode M} {M^X \text{ s'arrete sur } \encode M}$
+	$X' = \setdef c {\phi_c^X(c) \text{ est défini}} = \setdef {\encode M} {M^X \text{ s'arrête sur } \encode M}$
 
 \end{definition}
 
 
 \begin{definition}
-	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrete sur } \encode M}$$
-	$$\emptyset^{(n+1)} = \setdef {\encode M} {M^{\emptyset^{(n)}} \text{ s'arrete sur } \encode M} $$
+	$$\emptyset' = \setdef {\encode M} {M^{\emptyset} \text{ s'arrête sur } \encode M}$$
+	$$\emptyset^{(n+1)} = \setdef {\encode M} {M^{\emptyset^{(n)}} \text{ s'arrête sur } \encode M} $$
 \end{definition}
 
 
@@ -256,8 +256,8 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 
 
 \begin{proof}[Démonstration du point \ref{thm:post-2}]
-	Il faut donc monter que $\forall n, \emptyset^{(n)}$ est $\Sigma_n$-complet.
-	La demonstration est faite par induction. Les cas $n =0$ et $n=1$ on été traités précédemment, il suffit alors de montrer le cas d'induction.
+	Il faut donc montrer que $\forall n, \emptyset^{(n)}$ est $\Sigma_n$-complet.
+	La démonstration est faite par induction. Les cas $n=0$ et $n=1$ on été traités précédemment, il suffit alors de montrer le cas d'induction.
 
 	Supposons $\emptyset^{(n)} \ \Sigma_n$-complet.
 
@@ -277,8 +277,8 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 			      &\iff&  L \leqm  \emptyset^{(n+1)}
 		      \end{eqnarray*}
 		\item \bimpRL \\
-		      On a que $L \leqm \emptyset^{(n+1)}$. Soit $f$ la fonction de reduction, alors on pose
-		      $M_L = M_{\emptyset^{n+1} \circ f}$. Cette machine vérifie bien que $M_L^{\emptyset^{(n)}}$ reconnait  $L$
+		      On a que $L \leqm \emptyset^{(n+1)}$. Soit $f$ la fonction de réduction, alors on pose
+		      $M_L = M_{\emptyset^{n+1} \circ f}$. Cette machine vérifie bien que $M_L^{\emptyset^{(n)}}$ reconnait  $L$.
 	\end{itemize}
 \end{proof}
 
@@ -303,7 +303,7 @@ On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exist
 \end{remarque}
 
 \begin{proof}
-	En suite pour $n > 0$ on peut utiliser la remarque precedente. Ainsi, il suffit de montrer que $\emptyset^{(n)}$ n'est pas décidable relativement à $\emptyset^{(n-1)}$.
+	En suite pour $n > 0$ on peut utiliser la remarque précédente. Ainsi, il suffit de montrer que $\emptyset^{(n)}$ n'est pas décidable relativement à $\emptyset^{(n-1)}$.
 
 	Supposons par l'absurde que $\emptyset^{(n)}$ est décidable relativement à $\emptyset^{(n-1)}$, \ie, il existe $M_n$ telle que $M_n^{\emptyset^{(n-1)}}$ décide $\emptyset^{(n)}$.
 
