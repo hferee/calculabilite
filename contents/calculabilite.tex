@@ -50,7 +50,7 @@
 
 \begin{proof}
 	\begin{itemize}
-		\item \bimpLR \\
+		\item \bimpRL \\
 		      Soit $M_L$ qui semi-decide $L$. On pose $M_f$ la machine qui pour un mot $u \in \mots$, avec $n = \abs u$, fait :
 		      \begin{enumerate}
 			      \item Énumere toutes les paires $(w,k) \in \mots \times \N$.
@@ -67,7 +67,7 @@
 			            Si $w$ est énumeré par $M_f$, alors $w \in L$ car $\exists k$ tel que $M_L$ l'accepte en $k$ étapes.
 		      \end{itemize}
 
-		\item \bimpRL \\
+		\item \bimpLR \\
 		      Si $\exists M_f$ qui énumere $L$, alors on a que $L = \setdef {f(w)} {w \in \mots}$. Alors on pose $M_L$ la machine qui pour $w$,
 		      énumere les $w' \in \mots$ jusqu'à trouver $M_f(w') = w$ et qui accepte.
 	\end{itemize}
