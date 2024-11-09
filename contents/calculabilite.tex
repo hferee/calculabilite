@@ -1,6 +1,8 @@
 \section{Notion de calculabilité}
 
 
+\subsection{Langages décidables et semi-décidables}
+
 \begin{definition}[Langage semi-décidable]
 	Un langage $L \subseteq \mots$ est \textbf{semi-décidable} s'il existe une machine de Turing, $M_L$, \tlq
 	$$ \forall w \in \mots, w \in L \iff M_L(w) = 1 $$
@@ -23,6 +25,32 @@
 		\item $M(w) = 1 \implies w \in L$ peut être montrée par contraposée. Si $w \notin L$, alors $M(w) = 0$ car $M$ décide $L$ et donc $M(w) \neq 1$.
 	\end{itemize}
 \end{proof}
+
+
+\begin{definition}[eval]
+	On note $eval(\encode M, w, n)$ la machine que simule l'exécution de $M$ sur $w$ en au plus $n$ étapes.
+\end{definition}
+
+\begin{prop}[Admis]
+	$eval$ est décidable.
+\end{prop}
+
+\begin{prop}
+	$L$ est décidable $\iff$ $L$ est semi-décidable \emph{et} $L^c$ est semi-décidable
+\end{prop}
+
+\begin{proof}
+	\begin{itemize}
+		\item \bimpLR \ est triviale.
+		\item \bimpRL \\
+		      On peut exécuter les deux machines "en parallèle", \cad simuler une étape de calcul de $M_L$ puis une
+		      étape de $M_{L^c}$, en alternant ainsi jusqu'à ce que l'une des deux machines s'arrête. Cette machine
+		      est décidable, car elle s'arrête nécessairement : pour tout $w$, soit $w \in L$, soit $w \notin L$.
+	\end{itemize}
+	Ce théorème et sa preuve détaillée correspondent à ceux présentés dans \cite[Theorem~4.22]{sipser}.
+\end{proof}
+
+\subsection{Fonctions calculables}
 
 \begin{definition}[Fonction calculable]
 	$f : \mots \to \mots$ est calculable si $\exists M$ \tq $\forall w \in \mots, M$ s'arrête sur $w$ avec $f(w)$ sur le ruban.
@@ -124,26 +152,6 @@
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
 \end{lemma}
 
-\begin{definition}[eval]
-	On note $eval(\encode M, w, n)$ la machine que simule l'exécution de $M$ sur $w$ en au plus $n$ étapes.
-\end{definition}
-
-\begin{prop}[Admis]
-	$eval$ est décidable.
-\end{prop}
-
-\begin{prop}
-	$L$ est décidable $\iff$ $L$ est semi-décidable \emph{et} $L^c$ est semi-décidable
-\end{prop}
-
-\begin{proof}
-	\begin{itemize}
-		\item \bimpLR \ triviale
-		\item \bimpRL \\
-		      On peut exécuter en parallèle les deux machines. Elle s'arrête forcement car on a bien que $\forall w, w \in L \lor w \notin L$.
-	\end{itemize}
-	Ce théorème et sa preuve détaillée correspondent à ceux présentés dans \cite[Theorem~4.22]{sipser}.
-\end{proof}
 
 
 \begin{prop}
