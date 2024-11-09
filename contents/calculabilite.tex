@@ -72,6 +72,10 @@
 	$f : \mots \to \mots$ énumère $L \subseteq \mots$ si $\im f = L$ \ie $\forall w \in \mots, w \in L \iff \exists w' \in \mots, f (w') = w$.
 \end{definition}
 
+\begin{definition}[Récursivement énumerable]
+	Un langage est récursivement énumerable s'il existe une fonction qui l'énumère.
+\end{definition}
+
 \begin{prop}
 	$L$ est récursivement énumerable $\iff$ $L$ est semi-décidable.
 \end{prop}
@@ -101,6 +105,7 @@
 	\end{itemize}
 \end{proof}
 
+\subsection{Quelques propriétés des langages semi-décidables}
 
 \begin{prop}
 	Tout langage semi-décidable infini contient un langage décidable infini.
@@ -133,11 +138,27 @@
 	accepté en mois de $k_i$ étapes par $M_L$, et donc $w \in L'$ $\contradict$.
 \end{proof}
 
+\begin{prop}
+	$L$ semi-décidable $\iff \exists L_d \text{ décidable}, L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$
+\end{prop}
+
+
+\begin{proof}
+	On commence par remarque que : $w \in L \iff \exists t, eval(\encode {M_L}, w, t) = 1$. On pose
+	$L_d = \setdef {\encode{w, k}} {eval(\encode {M_L}, w,k) = 1}$.
+
+	On a bien que $L_d$ est décidable et le sens \bimpLR \ découle par construction.
+
+	L'autre sense, \ie, montrer que $L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$ est semi-décidable,
+	peut se faire par énumération sur les $w'$, mais elle est laissée en exercice au lecteur.
+\end{proof}
+
+\subsection{Énumeration des fonctions calculables}
+
 \begin{definition}[Nombre/Codage de Gödel]
 	On peut encoder toute machine de Turing par un nombre, qui est appété
 	le nombre Gödel de et noté : $\encode M \in \mots$.
 \end{definition}
-
 
 
 \begin{definition}[Énumération des fonctions calculables] \label{def:enum}
@@ -154,25 +175,11 @@
 
 
 
-\begin{prop}
-	$L$ semi-décidable $\iff \exists L_d \text{ décidable}, L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$
-\end{prop}
+
+\subsection{Le problème de l'arrêt et autres problèmes}
 
 
-\begin{proof}
-	On commence par remarque que : $w \in L \iff \exists t, eval(\encode {M_L}, w, t) = 1$. On pose
-	$L_d = \setdef {\encode{w, k}} {eval(\encode {M_L}, w,k) = 1}$.
-
-	On a bien que $L_d$ est décidable et le sens \bimpLR découle par construction.
-
-	L'autre sense, \ie, montrer que $L = \setdef {w \in \mots} {\exists w' \in \mots, \encode{w,w'} \in L_d}$ est semi-décidable,
-	peut se faire par énumération sur les $w'$, mais elle est laissée en exercice au lecteur.
-\end{proof}
-
-
-\subsection{Quelques problèmes}
-
-Quelques problèmes décidables en rapport aux automates :
+Les problèmes suivant en rapport aux automates sont décidables :
 
 \begin{itemize}
 	\item $\text{ACCEPT}_A = \setdef {<A,w>} {A \text { est un automate qui accepte } w}$.
