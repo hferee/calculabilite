@@ -39,7 +39,7 @@
 	$L$ est décidable $\iff$ $L$ est semi-décidable \emph{et} $L^c$ est semi-décidable
 \end{prop}
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
 		\item \bimpLR \ est triviale.
 		\item \bimpRL \\
@@ -48,7 +48,7 @@
 		      est décidable, car elle s'arrête nécessairement : pour tout $w$, soit $w \in L$, soit $w \notin L$.
 	\end{itemize}
 	Ce théorème et sa preuve détaillée correspondent à ceux présentés dans \cite[Theorem~4.22]{sipser}.
-\end{proof}
+\end{proofI}
 
 \subsection{Fonctions calculables}
 
@@ -80,7 +80,7 @@
 	$L$ est récursivement énumerable $\iff$ $L$ est semi-décidable.
 \end{prop}
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
 		\item \bimpRL \\
 		      Soit $M_L$ qui semi-decide $L$. On pose $M_f$ la machine qui pour un mot $u \in \mots$, avec $n = \abs u$, fait :
@@ -103,7 +103,7 @@
 		      Si $\exists M_f$ qui énumere $L$, alors on a que $L = \setdef {f(w)} {w \in \mots}$. Alors on pose $M_L$ la machine qui pour $w$,
 		      énumere les $w' \in \mots$ jusqu'à trouver $M_f(w') = w$ et qui accepte.
 	\end{itemize}
-\end{proof}
+\end{proofI}
 
 \subsection{Quelques propriétés des langages semi-décidables}
 
@@ -172,8 +172,6 @@
 	ou de manière equivalente
 	$$\exists u, \forall n,w, \ \phi_n(w) = \phi_u(\encode {n,w})$$
 \end{lemma}
-
-
 
 
 \subsection{Le problème de l'arrêt et autres problèmes}

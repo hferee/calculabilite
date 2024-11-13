@@ -77,28 +77,12 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{exercice}
 
 \begin{proof}
-
 	Soit $L \in \Sigma_1$. Alors il existe $\phi \in \Delta_0$ \tq
 	$$ L = \setdef {n} {\exists x \phi(x,n)} $$
 
 	Soit $M(n)$ la machine qui énumère tous les $x$ et accepte si $\phi(x,n)$ est satisfaite.
 	Alors $M$ reconnait $L$.
 \end{proof}
-
-
-\iffalse
-	\begin{prop}
-		$L$ est r.e. $\implies L \in \Sigma_1$.
-	\end{prop}
-
-	\begin{proof}
-		\begin{eqnarray*}
-			L \text{ est r.e.} &\iff& (\forall w, w \in L \iff \exists x, eval (\encode M,w,x) = 1)\\
-			&\implies& L \in \Sigma_1
-		\end{eqnarray*}
-	\end{proof}
-\fi
-
 
 \begin{prop} \label{prop:sigma-re}
 	$RE = \Sigma_1$
@@ -119,11 +103,9 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{definition}
 
 \begin{definition}[Reconnaissance]
-
 	On dit que $M$ reconnait $L$ relativement à un oracle $A$ si
 	$$ \forall w, M^A (w) = 1 \iff w \in L $$
 	où $M^A$ est l'exécution de $M$ avec l'oracle $A$.
-
 \end{definition}
 
 \begin{definition}[Reduction de Turing]
@@ -222,7 +204,7 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{remarque}
 
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
 		\item \begin{eqnarray*}
 			      \encode M \in \emptyset' &\iff& M^{\emptyset} (\encode M) \neq \bot \\
@@ -237,7 +219,7 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 		      \end{eqnarray*}
 		      Et donc $\halt \leqm \emptyset'$.
 	\end{itemize}
-\end{proof}
+\end{proofI}
 
 
 \begin{exercice}
@@ -248,12 +230,12 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 	\end{enumerate}
 \end{exercice}
 
-\begin{proof}
+\begin{proofI}
 	\begin{enumerate}
 		\item $\encode M \in \emptyset' \iff \exists t, eval (\encode M, ((\_,0), \ldots, (\_,0)), \encode M, t) \neq \bot$
 		\item On a que $\emptyset' \equivm \halt$ qui est $\Sigma_1$-complet, donc $\emptyset'$ l'est aussi.
 	\end{enumerate}
-\end{proof}
+\end{proofI}
 
 
 
