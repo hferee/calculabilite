@@ -44,7 +44,7 @@
 	C'est la contraposée du théorème précédent.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thm:leqm_sdec}
 	$A \leqm B$ et $B$ est semi-décidable, alors $A$ est semi-décidable
 \end{theorem}
 
@@ -119,26 +119,38 @@
 	On a donc que $L$ n'est ni RE ni co-RE.
 \end{proof}
 
+Dans les deux exercices suivants, on pourra utiliser (implicitement ou explicitement) le fait que la composition de machines de Turing est \emph{uniformément calculable}.
+\begin{lemma}\label{lem:comp}
+	Il existe une fonction calculable \emph{comp} telle que :
+	$$\forall c c' w, \phi_{\emph{c, c'}}(w) = \phi_c(\phi_{c'}(w))$$
+\end{lemma}
+
+% Informellement, il « suffit » de décrire le code de la machine composée de l'union disjointe des deux machines d'entrée
+% et de relier l'état final de l'une à l'état initial de l'autre.
+
+
 \begin{exercice}
-	Montrer que si un programme reconnait le langage vide alors il est indécidable.
+	Montrer que l'ensemble des programmes reconnaissant le langage vide est indécidable.
 \end{exercice}
 
 \begin{proof}
 	Il suffit de montrer que $\overline{\halt} \leqm L_{\emptyset} = \setdef{\encode M} {\forall w \in \mots, M(w) \neq 1}$.
 
-	On pose la machine $M'$ suivante :
+	Notons $f_1$ la fonction calculable qui sur $\encode M$ retourne le code de l'une machine $M'$ définie par:
 	\begin{algorithmic}[lines]
 		\Function{$M'$}{$w$}
 		\State $M(w)$;
 		\State \textbf{return} $1$
 		\EndFunction
 	\end{algorithmic}
+	Prour une preuve plus formelle de la calculabilité de cette fonction, on pourra utiliser le lemme~\ref{lem:comp}
+	ainsi que le théorème Smn (i.e. théorème~\ref{thm:it}).
 
 	Alors on a que
 	\begin{eqnarray*}
 		\encode{M,w} \in \overline{\halt} &\iff& M(w) = \bot \\
-		&\iff& \forall w', M'(w') \neq 1 \\
-		&\iff& M' \in L_{\emptyset}
+		&\iff& \forall w, \phi_{f_1(\encode M)}(w) \neq 1 \\
+		&\iff& f_1(\encode M) \in L_{\emptyset}
 	\end{eqnarray*} et donc $\overline{\halt} \leqm L_{\emptyset}$.
 
 \end{proof}
@@ -155,12 +167,14 @@
 	Soit $M$ une machine de Turing et $w$ un mot :
 	\begin{itemize}
 		\item On pose $M' =  \fun \_ {M(w); \text{ return } 1}$. \\
-		      $\encode {M,w} \in \halt \iff \encode {M_1, M', w} \in EQUIV$. Donc $\halt \leqm EQUIV$.
+		      $\encode {M,w} \in \halt \iff \encode {M_1, M', w} \in EQUIV$. \\
+			La transformation $\encode M \mapsto \encode {M_1, M', w}$ est bien calcualble, donc $\halt \leqm EQUIV$.
 		\item  On pose $M' =  \fun \_ {M(w)}$. \\
-		      $\encode {M,w} \in \overline{\halt} \iff \encode {M_{loop}, M', w} \in L$. Donc $\overline{\halt} \leqm EQUIV$.
+		      $\encode {M,w} \in \overline{\halt} \iff \encode {M_{loop}, M', w} \in L$. \\
+			La transformation $\encode M \mapsto \encode {M_{loop}, M', w}$ est bien calcualble, donc $\overline{\halt} \leqm EQUIV$.
 	\end{itemize}
 
-	On a donc que $EQUIV$ n'est ni RE ni co-RE.
+	On a donc, d'après le théorème~\ref{thm:leqm_sdec} que $EQUIV$ n'est ni RE ni co-RE.
 \end{proof}
 
 

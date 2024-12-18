@@ -8,8 +8,8 @@
 		\item $Q$ est un ensemble fini d'états
 		\item $\Gamma$ est un alphabet fini de symboles de ruban, et $\Sigma \subseteq \Gamma$
 		\item $\delta$ est la fonction de transition
-		      $$ \delta: \underbrace{Q}_{\text{État currant}} \times \underbrace{\Gamma}_{\text{Lit}} \to \underbrace{Q}_{\text{Nouveau état}} \times
-			      \underbrace{\Gamma}_{\text{Écrit}} \times \underbrace{\{R, L, N\}}_{\text{Direction}} $$
+		      $$ \delta: \underbrace{Q}_{\text{État courant}} \times \underbrace{\Gamma}_{\text{Lettre lue}} \to \underbrace{Q}_{\text{Nouvel état}} \times
+			      \underbrace{\Gamma}_{\text{Lettre écrite}} \times \underbrace{\{R, L, N\}}_{\text{Direction}} $$
 		\item $q_0 \in Q$ est l'état initial
 		\item $q_a \in Q$ est l'état d'acceptation
 		\item $q_r \in Q$ est l'état de rejet
@@ -83,12 +83,12 @@ Comment se déroule une exécution d'une machine de Turing pour un mot $w \in \S
 \end{definition}
 
 \begin{prop}
-	Les machines de Turing déterministes et non-déterministes reconnaissent les memes langages.
+	Les machines de Turing déterministes et non-déterministes reconnaissent les mêmes langages.
 \end{prop}
 
 \begin{proof}
 	L'idée derrière la preuve est d'explorer les branches de l'évaluation non déterministe de la machine. Cette exploration
 	se fait en largeur, afin d'éviter de suivre une branche qui boucle alors qu'une autre branche acceptante aurait pu être explorée.
 
-	La description de la machine a été étudiée en TD, et elle est également disponible dans la preuve du \cite[Theorem~3.16]{sipser}.
+	La description de la machine a été étudiée en TD, et elle est également disponible dans la preuve de \cite[Theorem~3.16]{sipser}.
 \end{proof}

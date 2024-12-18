@@ -1,6 +1,10 @@
 \section{Théorèmes de récursion}
 
 
+L'application partielle d'une fonction calculable (ou plutôt de sa currification)  est une fonction calculable.
+Elle est en fait \emph{calculable uniformément}, i.e. on peut calculer le code de l'application partielle en fonction
+du code de la fonction.
+
 \begin{theorem}[d'itération / Smn / d'application partielle]\label{thm:it}
 	Il existe une fonction calculable et totale $s$ \tlq
 	$$\forall n,m,w, \phi_{s(m,n)}(w) = \phi_m(\encode {n,w})$$

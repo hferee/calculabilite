@@ -4,11 +4,11 @@
 
 Dans cette section, nous allons étudier les $\underbrace{\text{formules}}_{\land, \lor, \lnot}$
 $\underbrace{\text{arithmétiques}}_{\N, +, *, \leq, \text{S}}$ du $\underbrace{\text{premier ordre}}_{\exists x, \forall x}$
-sous forme prénexe et comment les classifier.
+sous forme prénexe et voir comment les classifier.
 
 
 \begin{definition}[Forme prénexe]
-	Une formule est sous forme prénexe si tous ses quantificateurs non-bornés sont "à gauche".
+	Une formule est sous forme prénexe si tous ses quantificateurs non-bornés sont en tête (i.e. "à gauche").
 
 	$(\forall x (x \leq 2)) \land  (\forall y (2 \leq y))$ n'est pas sous forme prénexe mais $(\forall x \forall y ((x \leq 2) \land  (2 \leq y))$ l'est.
 \end{definition}
@@ -35,11 +35,12 @@ sous forme prénexe et comment les classifier.
 	Pour tout $\phi$ il existe $\phi_1$ et $\phi_2$ tels que :
 	$$ \forall x_1, \forall x_2, \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
 	Le même résultat peut être obtenu pour le quantificateur existentiel.
-	Cette propriété découle du fait que $\N \cong \N \times \N$.
+	Cette propriété découle du fait que $\N \cong \N \times \N$ et qu'il existe un tel encodage des paires d'entiers qui peut être décodé 
+	via une formule $\Delta_0$. On pourra trouver quelques exemples de fonctions de couplage comme celle de Cantor ici~\url{https://en.wikipedia.org/wiki/Pairing\_function}).
 \end{lemma}
 
-\begin{prop}
-	$\Delta_0$ est un ensemble calculable.
+\begin{prop}\label{prop:D0-dec}
+	Les langages de $\Delta_0$ sont décidables.
 \end{prop}
 
 \begin{proof}
@@ -89,7 +90,10 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{prop}
 
 \begin{proof}
-	$$L \text{ est r.e.} \iff \exists L_d \text{ décidable }, L = \setdef {w} {\overbrace{\exists w', \underbrace{\encode {w, w'} \in L_d}_{\in \Delta_0}}^{\in \Sigma_1}}$$
+D'après la proposition~\ref{prop:sd-spec} :
+	$$L \text{ est r.e.} \Rightarrow \exists L_d \text{ décidable }, L = \setdef {w} {\overbrace{\exists w', \underbrace{\encode {w, w'} \in L_d}_{\in \Delta_0}}^{\in \Sigma_1}}$$
+Inversement, $$L \in \Sigma_1 \iff L = \{w\ |\ \exists w', \phi(w, w')\} \text{ avec } \phi \in  \Delta_0$$.
+Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en trouver un tel que $\phi (w, w')$, que l'on peut décider d'après la proposition~\ref{prop:D0-dec}.
 	Et donc $RE = \Sigma_1$
 \end{proof}
 
@@ -103,17 +107,17 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{definition}
 
 \begin{definition}[Reconnaissance]
-	On dit que $M$ reconnait $L$ relativement à un oracle $A$ si
+	On dit que $M$ reconnait $L$ relativement à un oracle~$A$ si
 	$$ \forall w, M^A (w) = 1 \iff w \in L $$
-	où $M^A$ est l'exécution de $M$ avec l'oracle $A$.
+	où $M^A$ est l'exécution de $M$ avec l'oracle~$A$.
 \end{definition}
 
 \begin{definition}[Reduction de Turing]
-	On dit que $A \leqt B \iff A$ est décidable relativement à $B$.
+	On dit que $A \leqt B \iff A$ est décidable relativement à~$B$.
 \end{definition}
 
 \begin{remarque}
-	On a que $A \leqm B \implies A \leqt B$ (il suffit de prendre la fonction de reduction $f$ comme oracle).
+	On a que $A \leqm B \implies A \leqt B$. En effet, il suffit de construire la machine à oracle qui sur $w$ appelle l'oracle sur $f(w)$, où $f$ est la fonction de reduction.
 \end{remarque}
 
 \begin{remarque}
@@ -127,7 +131,12 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{lemma}
 
 \begin{proof}
-	TODO
+	Par définition, $X \text{ est } re(Y)$ s'il existe une machine à oracle $M$ telle que $X$ est reconnu par $M^Y$.
+	Comme $A$ est $C$-complet et $Y \in C$, il existe une réduction calculable $f$ de $Y$ vers $A$.
+	On pose $N$ la machine à oracle construite à partir de $M$ et qui applique $f$ au ruban d'appel, avan chaque appel à l'oracle.
+	Autrement dit, pour tout oracle ${\mathscr O}$ et toute entrée $w$, $N^{{\mathscr O}}(w) = M^{{\mathscr O} \circ f}$.
+	On a donc que $N^A$ reconnaît $X$.
+	
 \end{proof}
 
 
@@ -140,14 +149,14 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 		      \begin{enumerate}
 			      \item \label{thm:post-1a}
 			            \begin{eqnarray*}
-				            L \in \Sigma_{n+1} &\iff& L \text{ est r.e. relativement  un langage }  \Pi_n  \\
-				            &\iff& L \text{ est r.e. relativement  un langage }  \Sigma_{n}
+				            L \in \Sigma_{n+1} &\iff& L \text{ est r.e. relativement à un langage }  \Pi_n  \\
+				            &\iff& L \text{ est r.e. relativement à un langage }  \Sigma_{n}
 			            \end{eqnarray*}
 
 			      \item
 			            \begin{eqnarray*}
-				            L \in \Pi_{n+1} &\iff& L \text{ est co-r.e. relativement  un langage }  \Sigma_n  \\
-				            &\iff& L \text{ est co-r.e. relativement  un langage }  \Pi_n
+				            L \in \Pi_{n+1} &\iff& L \text{ est co-r.e. relativement à un langage }  \Sigma_n  \\
+				            &\iff& L \text{ est co-r.e. relativement à un langage }  \Pi_n
 			            \end{eqnarray*}
 		      \end{enumerate}
 
